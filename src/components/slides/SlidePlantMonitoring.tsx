@@ -86,10 +86,13 @@ const SlidePlantMonitoring = () => {
 
   return (
     <div style={{
-      minHeight: '100vh',
+      height: '100vh',
       background: 'linear-gradient(180deg, #f0f1f3 0%, #e4e5e7 100%)',
       fontFamily: '"IBM Plex Sans", system-ui, sans-serif',
-      padding: '40px 20px',
+      padding: '20px 20px 16px',
+      display: 'flex',
+      flexDirection: 'column' as const,
+      overflow: 'hidden',
     }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
@@ -123,7 +126,7 @@ const SlidePlantMonitoring = () => {
       {/* Header */}
       <div style={{
         maxWidth: '960px',
-        margin: '0 auto 28px',
+        margin: '0 auto 12px',
         textAlign: 'center',
       }}>
         <div style={{
@@ -133,7 +136,7 @@ const SlidePlantMonitoring = () => {
           background: 'linear-gradient(180deg, #c8c8c8 0%, #b0b0b0 100%)',
           padding: '6px 16px',
           borderRadius: '2px',
-          marginBottom: '16px',
+          marginBottom: '8px',
           boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.15)',
           border: '1px solid #999',
         }}>
@@ -170,7 +173,9 @@ const SlidePlantMonitoring = () => {
       {/* Main Display */}
       <div style={{
         maxWidth: '960px',
-        margin: '0 auto 40px',
+        margin: '0 auto 16px',
+        flex: '1',
+        minHeight: 0,
         background: '#1a1d21',
         borderRadius: '8px',
         border: '1px solid #333',
@@ -452,7 +457,7 @@ const SlidePlantMonitoring = () => {
       </div>
 
       {/* Use Cases Section */}
-      <div style={{ maxWidth: '960px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '960px', margin: '0 auto', flexShrink: 0 }}>
         <h2 style={{
           fontSize: '13px',
           fontWeight: '600',
