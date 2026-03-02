@@ -332,3 +332,14 @@
   0% { background-position: 0 0; }
   100% { background-position: 20px 0; }
 }
+
+@keyframes feedRollMove {
+  to { background-position-x: 36px; }
+}
+
+@keyframes feedPalletMove {
+  0% { left: -12%; opacity: 0; }
+  6% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { left: 108%; opacity: 0; }
+}
