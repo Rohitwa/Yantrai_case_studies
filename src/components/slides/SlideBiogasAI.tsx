@@ -49,6 +49,9 @@ const SlideBiogasAI = () => {
         .biogas-cap-card:nth-child(1) { animation-delay: 1.5s; }
         .biogas-cap-card:nth-child(2) { animation-delay: 3s; }
         .biogas-cap-card:nth-child(3) { animation-delay: 4.5s; }
+        .biogas-cap-card:nth-child(4) { animation-delay: 6s; }
+        .biogas-cap-card:nth-child(5) { animation-delay: 7.5s; }
+        .biogas-cap-card:nth-child(6) { animation-delay: 9s; }
       `}</style>
 
       <div className="sec-label">Biogas AI Platform</div>
@@ -88,7 +91,7 @@ const SlideBiogasAI = () => {
           </div>
 
           {/* Left connectors */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, flex: '0 0 80px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: '0 0 80px', justifyContent: 'center' }}>
             {[0, 1, 2].map(i => (
               <div key={i} className="biogas-connector" style={{ height: 42, display: 'flex', alignItems: 'center' }}>
                 <div className="biogas-dot" style={{ animationDelay: `${i * 0.4}s` }} />
@@ -115,24 +118,27 @@ const SlideBiogasAI = () => {
           </div>
 
           {/* Right connectors */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, flex: '0 0 80px' }}>
-            {[0, 1, 2].map(i => (
-              <div key={i} className="biogas-connector" style={{ height: 42, display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, flex: '0 0 80px' }}>
+            {[0, 1, 2, 3, 4, 5].map(i => (
+              <div key={i} className="biogas-connector" style={{ height: 28, display: 'flex', alignItems: 'center' }}>
                 <div className="biogas-dot" style={{ animationDelay: `${i * 0.4 + 1}s` }} />
               </div>
             ))}
           </div>
 
           {/* Right — Capabilities */}
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
             {[
               { title: 'Predictive Maintenance', desc: 'Failure risk detected → service scheduled', color: 'hsl(var(--slide-green))' },
               { title: 'Feedstock Optimization', desc: 'Input quality drop → yield stabilized', color: 'hsl(var(--slide-accent))' },
               { title: 'Real-Time Process Control', desc: 'pH deviation detected → auto correction', color: 'hsl(var(--slide-teal))' },
+              { title: 'Gas Leak & Safety', desc: 'Leak detected → emergency protocol activated', color: 'hsl(var(--slide-green))' },
+              { title: 'Resource Planning & Optimization', desc: 'Usage forecast → allocation optimized', color: 'hsl(var(--slide-accent))' },
+              { title: 'Quality Control', desc: 'Output anomaly flagged → process adjusted', color: 'hsl(var(--slide-teal))' },
             ].map((c, i) => (
               <div key={i} className="biogas-cap-card" style={{
                 background: 'hsl(var(--slide-bg))', borderRadius: 10,
-                padding: '12px 16px', border: '1px solid hsl(var(--border))',
+                padding: '8px 12px', border: '1px solid hsl(var(--border))',
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                   <div style={{ width: 7, height: 7, borderRadius: '50%', background: c.color, boxShadow: `0 0 6px ${c.color}` }} />
