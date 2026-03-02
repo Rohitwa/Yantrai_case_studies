@@ -3,13 +3,13 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import SlideIntro from '@/components/slides/SlideIntro';
 import SlideArchitecture from '@/components/slides/SlideArchitecture';
 import SlideFeedMonitoring from '@/components/slides/SlideFeedMonitoring';
-import SlideFactoryDispatch from '@/components/slides/SlideFactoryDispatch';
+
 import SlidePilferage from '@/components/slides/SlidePilferage';
 import SlidePlantMonitoring from '@/components/slides/SlidePlantMonitoring';
 import SlideOneGodown from '@/components/slides/SlideOneGodown';
 import SlideContact from '@/components/slides/SlideContact';
 
-const TOTAL_SLIDES = 8;
+const TOTAL_SLIDES = 7;
 
 const Index = () => {
   const [current, setCurrent] = useState(0);
@@ -43,11 +43,9 @@ const Index = () => {
     <SlideIntro key={0} />,
     <SlideArchitecture key={1} />,
     <SlideFeedMonitoring key={2} />,
-    <SlideFactoryDispatch key={3} variant="sourcing" />,
-    <SlideFactoryDispatch key={4} variant="dispatch" />,
-    <SlidePilferage key={5} />,
-    <SlidePlantMonitoring key={6} />,
-    <SlideOneGodown key={7} />,
+    <SlidePilferage key={3} />,
+    <SlidePlantMonitoring key={4} />,
+    <SlideOneGodown key={5} />,
   ];
 
   // Replace slide 8 (index 7) with contact if we have 8 slides
@@ -61,12 +59,10 @@ const Index = () => {
     <SlideIntro key={0} />,
     <SlideArchitecture key={1} />,
     <SlideFeedMonitoring key={2} />,
-    <SlideFactoryDispatch key={3} variant="sourcing" />,
-    <SlideFactoryDispatch key={4} variant="dispatch" />,
-    <SlidePilferage key={5} />,
-    <SlidePlantMonitoring key={6} />,
-    <SlideOneGodown key={7} />,
-    <SlideContact key={8} />,
+    <SlidePilferage key={3} />,
+    <SlidePlantMonitoring key={4} />,
+    <SlideOneGodown key={5} />,
+    <SlideContact key={6} />,
   ];
 
   const total = allSlides.length;
