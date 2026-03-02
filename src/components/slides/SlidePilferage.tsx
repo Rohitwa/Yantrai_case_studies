@@ -19,14 +19,15 @@ const SlidePilferage = () => {
         </div>
 
         {/* Video viewport */}
-        <div className="relative overflow-hidden" style={{ height: '360px', background: '#000' }}>
+        <div className="relative overflow-hidden" style={{ background: '#000' }}>
           <video
             src={pilferageVideo}
             autoPlay
             loop
             muted
             playsInline
-            className="w-full h-full object-cover"
+            className="w-full"
+            style={{ display: 'block', maxHeight: '340px', objectFit: 'contain' }}
           />
         </div>
 
