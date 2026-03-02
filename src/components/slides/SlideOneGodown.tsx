@@ -1,19 +1,19 @@
 const SlideOneGodown = () => {
   return (
     <div className="slide-inner">
-      <div className="sec-label">Case Study</div>
-      <h2 className="slide-title">One Godown AI — <em>Multi-SKU Vision</em></h2>
-      <p className="text-sm mb-8 max-w-[700px]" style={{ color: 'hsl(var(--slide-muted))' }}>
+      <div className="sec-label">Solutions we have delivered</div>
+      <h2 className="slide-title">One Godown</h2>
+      <p className="text-sm mb-4 max-w-[700px]" style={{ color: 'hsl(var(--slide-muted))' }}>
         Seamless, faster Vision AI for retail — multi-SKU detection at the point of sale, powered by YantraI Labs.
       </p>
 
       {/* YouTube Embed */}
-      <div className="w-full max-w-[800px] mx-auto mb-8">
+      <div className="w-full max-w-[640px] mx-auto mb-4">
         <div
           className="rounded-2xl overflow-hidden"
           style={{
-            border: '8px solid #2c2c3c',
-            boxShadow: '0 12px 40px rgba(0,0,0,0.35), inset 0 2px 4px rgba(255,255,255,0.1)',
+            border: '2px solid rgba(0,0,0,0.06)',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
           }}
         >
           <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
@@ -29,7 +29,7 @@ const SlideOneGodown = () => {
       </div>
 
       {/* Use cases */}
-      <div className="grid grid-cols-3 gap-5 w-full max-w-[800px] mx-auto">
+      <div className="grid grid-cols-3 gap-3 w-full max-w-[640px] mx-auto">
         {[
           { icon: '📦', title: 'Multi-SKU Detection', desc: 'Identify multiple product types in a single frame at the retail counter.' },
           { icon: '⚡', title: 'Real-Time Processing', desc: 'Instant detection and counting with no lag at the point of sale.' },
@@ -37,7 +37,7 @@ const SlideOneGodown = () => {
         ].map((item, i) => (
           <div
             key={i}
-            className="rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1"
+            className="rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1"
             style={{
               background: 'hsl(var(--slide-bg2))',
               border: '1px solid hsl(var(--border))',
