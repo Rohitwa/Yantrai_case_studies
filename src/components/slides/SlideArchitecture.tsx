@@ -10,10 +10,11 @@ const SlideArchitecture = () => {
         <div
           className="rounded-2xl overflow-hidden"
           style={{
-            border: '8px solid #2c2c3c',
-            boxShadow: '0 12px 40px rgba(0,0,0,0.35), inset 0 2px 4px rgba(255,255,255,0.1)',
+            border: '1px solid rgba(0,0,0,0.06)',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
             maxWidth: '900px',
             width: '100%',
+            background: '#fff',
           }}
         >
           <img
