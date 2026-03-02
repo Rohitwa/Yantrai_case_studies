@@ -61,33 +61,33 @@ const SlideIntro = () => {
             <svg viewBox="0 0 400 400" className="w-full h-full" style={{ opacity: 0.6 }}>
               <defs>
                 <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stopColor="hsl(245 62% 56%)" stopOpacity="0.6" />
-                  <stop offset="100%" stopColor="hsl(245 62% 56%)" stopOpacity="0" />
+                  <stop offset="0%" stopColor="hsl(217 91% 60%)" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="hsl(217 91% 60%)" stopOpacity="0" />
                 </radialGradient>
               </defs>
               {/* Connection lines */}
-              <line x1="200" y1="120" x2="120" y2="200" stroke="hsl(245 62% 56%)" strokeWidth="1" strokeOpacity="0.3" />
-              <line x1="200" y1="120" x2="280" y2="200" stroke="hsl(245 62% 56%)" strokeWidth="1" strokeOpacity="0.3" />
-              <line x1="120" y1="200" x2="200" y2="280" stroke="hsl(245 62% 56%)" strokeWidth="1" strokeOpacity="0.3" />
-              <line x1="280" y1="200" x2="200" y2="280" stroke="hsl(245 62% 56%)" strokeWidth="1" strokeOpacity="0.3" />
-              <line x1="200" y1="120" x2="200" y2="280" stroke="hsl(245 62% 56%)" strokeWidth="1" strokeOpacity="0.2" />
-              <line x1="120" y1="200" x2="280" y2="200" stroke="hsl(245 62% 56%)" strokeWidth="1" strokeOpacity="0.2" />
+              <line x1="200" y1="120" x2="120" y2="200" stroke="hsl(217 91% 60%)" strokeWidth="1" strokeOpacity="0.3" />
+              <line x1="200" y1="120" x2="280" y2="200" stroke="hsl(217 91% 60%)" strokeWidth="1" strokeOpacity="0.3" />
+              <line x1="120" y1="200" x2="200" y2="280" stroke="hsl(217 91% 60%)" strokeWidth="1" strokeOpacity="0.3" />
+              <line x1="280" y1="200" x2="200" y2="280" stroke="hsl(217 91% 60%)" strokeWidth="1" strokeOpacity="0.3" />
+              <line x1="200" y1="120" x2="200" y2="280" stroke="hsl(217 91% 60%)" strokeWidth="1" strokeOpacity="0.2" />
+              <line x1="120" y1="200" x2="280" y2="200" stroke="hsl(217 91% 60%)" strokeWidth="1" strokeOpacity="0.2" />
               {/* Nodes */}
               <circle cx="200" cy="120" r="20" fill="url(#nodeGlow)" />
-              <circle cx="200" cy="120" r="6" fill="hsl(245 62% 56%)" />
+              <circle cx="200" cy="120" r="6" fill="hsl(217 91% 60%)" />
               <circle cx="120" cy="200" r="16" fill="url(#nodeGlow)" />
-              <circle cx="120" cy="200" r="5" fill="hsl(243 77% 62%)" />
+              <circle cx="120" cy="200" r="5" fill="hsl(221 83% 53%)" />
               <circle cx="280" cy="200" r="16" fill="url(#nodeGlow)" />
-              <circle cx="280" cy="200" r="5" fill="hsl(243 77% 62%)" />
+              <circle cx="280" cy="200" r="5" fill="hsl(221 83% 53%)" />
               <circle cx="200" cy="280" r="18" fill="url(#nodeGlow)" />
-              <circle cx="200" cy="280" r="6" fill="hsl(160 84% 30%)" />
+              <circle cx="200" cy="280" r="6" fill="hsl(142 76% 36%)" />
               {/* Outer nodes */}
-              <circle cx="100" cy="120" r="3" fill="hsl(245 62% 56%)" opacity="0.4" />
-              <circle cx="300" cy="120" r="3" fill="hsl(245 62% 56%)" opacity="0.4" />
-              <circle cx="80" cy="280" r="3" fill="hsl(245 62% 56%)" opacity="0.3" />
-              <circle cx="320" cy="280" r="3" fill="hsl(245 62% 56%)" opacity="0.3" />
-              <line x1="100" y1="120" x2="200" y2="120" stroke="hsl(245 62% 56%)" strokeWidth="0.5" strokeOpacity="0.2" />
-              <line x1="300" y1="120" x2="200" y2="120" stroke="hsl(245 62% 56%)" strokeWidth="0.5" strokeOpacity="0.2" />
+              <circle cx="100" cy="120" r="3" fill="hsl(217 91% 60%)" opacity="0.4" />
+              <circle cx="300" cy="120" r="3" fill="hsl(217 91% 60%)" opacity="0.4" />
+              <circle cx="80" cy="280" r="3" fill="hsl(217 91% 60%)" opacity="0.3" />
+              <circle cx="320" cy="280" r="3" fill="hsl(217 91% 60%)" opacity="0.3" />
+              <line x1="100" y1="120" x2="200" y2="120" stroke="hsl(217 91% 60%)" strokeWidth="0.5" strokeOpacity="0.2" />
+              <line x1="300" y1="120" x2="200" y2="120" stroke="hsl(217 91% 60%)" strokeWidth="0.5" strokeOpacity="0.2" />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="font-serif text-5xl tracking-tighter" style={{ color: 'hsl(var(--slide-accent))', opacity: 0.15, fontSize: '120px' }}>Y</span>
