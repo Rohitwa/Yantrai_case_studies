@@ -3,8 +3,9 @@ import pilferageVideo from '@/assets/veesion-IA-crop-1.mp4';
 const SlidePilferage = () => {
   return (
     <div className="slide-inner">
-      <div className="sec-label">Security</div>
-      <h2 className="slide-title">Pilferage <em>Detection AI</em></h2>
+      <div className="text-center mb-4">
+        <h2 className="slide-title">Pilferage <em>Detection AI</em></h2>
+      </div>
 
       <div className="w-full max-w-[900px] mx-auto rounded-xl overflow-hidden" style={{ background: 'linear-gradient(145deg, #1a1d21 0%, #0d0f11 100%)', boxShadow: '0 25px 80px rgba(0,0,0,0.6)' }}>
         {/* Header bar */}

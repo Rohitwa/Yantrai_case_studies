@@ -129,43 +129,10 @@ const SlidePlantMonitoring = () => {
         margin: '0 auto 12px',
         textAlign: 'center',
       }}>
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          background: 'linear-gradient(180deg, #c8c8c8 0%, #b0b0b0 100%)',
-          padding: '6px 16px',
-          borderRadius: '2px',
-          marginBottom: '8px',
-          boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,0.15)',
-          border: '1px solid #999',
-        }}>
-          <div style={{
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            background: '#22c55e',
-            boxShadow: '0 0 6px #22c55e',
-            animation: 'pulse 1.5s infinite',
-          }} />
-          <span style={{
-            fontFamily: '"IBM Plex Mono", monospace',
-            fontSize: '11px',
-            fontWeight: '500',
-            color: '#333',
-            letterSpacing: '0.08em',
-          }}>AI MONITORING ACTIVE</span>
-        </div>
-        <h1 style={{
-          fontSize: '26px',
-          fontWeight: '700',
-          color: '#1a1a1a',
-          margin: '0 0 6px',
-          letterSpacing: '-0.02em',
-        }}>Real-Time Activity Monitoring</h1>
+        <h2 className="slide-title" style={{ marginBottom: 6 }}>Real-Time <em>Activity Monitoring</em></h2>
         <p style={{
           fontSize: '13px',
-          color: '#6b7280',
+          color: 'hsl(var(--slide-muted))',
           margin: 0,
         }}>Compliance Validation in Operations</p>
       </div>
