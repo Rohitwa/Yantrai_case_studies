@@ -6,6 +6,7 @@ import SlideFeedMonitoring from '@/components/slides/SlideFeedMonitoring';
 
 import SlidePilferage from '@/components/slides/SlidePilferage';
 import SlidePlantMonitoring from '@/components/slides/SlidePlantMonitoring';
+import SlideBiogasAI from '@/components/slides/SlideBiogasAI';
 import SlideOneGodown from '@/components/slides/SlideOneGodown';
 import SlideContact from '@/components/slides/SlideContact';
 
@@ -61,8 +62,9 @@ const Index = () => {
     <SlideFeedMonitoring key={2} />,
     <SlidePilferage key={3} />,
     <SlidePlantMonitoring key={4} />,
-    <SlideOneGodown key={5} />,
-    <SlideContact key={6} />,
+    <SlideBiogasAI key={5} />,
+    <SlideOneGodown key={6} />,
+    <SlideContact key={7} />,
   ];
 
   const total = allSlides.length;
