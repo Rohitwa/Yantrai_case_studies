@@ -1,41 +1,21 @@
 
 
-## New Page 6: Biogas AI Intelligence Layer
+## Plan: Add 3 missing capability cards to Page 6 (Biogas AI)
 
-**Insert a new slide after Page 5 (Plant Monitoring) and before current Page 6 (One Godown). Total slides go from 7 to 8.**
+Add "Gas Leak & Safety", "Resource Planning & Optimization", and "Quality Control" to the right column capabilities, making it 6 cards total. Adjust spacing and animation delays to fit all 6 within the diagram.
 
-### Content (extracted from GIF)
+### Changes to `src/components/slides/SlideBiogasAI.tsx`
 
-The slide is an animated architecture diagram for the "Biogas AI Platform":
+1. **Add 3 new entries** to the capabilities array (lines 128-131):
+   - `{ title: 'Gas Leak & Safety', desc: 'Leak detected → emergency protocol activated', color: 'hsl(var(--slide-green))' }`
+   - `{ title: 'Resource Planning & Optimization', desc: 'Usage forecast → allocation optimized', color: 'hsl(var(--slide-accent))' }`
+   - `{ title: 'Quality Control', desc: 'Output anomaly flagged → process adjusted', color: 'hsl(var(--slide-teal))' }`
 
-- **Header**: Label "Biogas AI Platform", title "Turn plant data into real-time intelligence.", subtitle about unified AI for video/sensors/ops data
-- **Main diagram** inside a rounded card labeled "Unified AI Intelligence Layer" with three columns:
-  - **Left — Data Sources**: Three items stacked vertically with icons and dashed connector lines animating toward the center:
-    - Camera (camera icon)
-    - IoT Sensors (signal/wifi icon)
-    - Ops Logs (list/menu icon)
-  - **Center — AI Engine**: A pulsing concentric circle element with "AI Engine" label, connected by animated dashed lines with small moving dots
-  - **Right — Capabilities**: Three cards that slide in sequentially (staggered animation):
-    1. **Predictive Maintenance** — "Failure risk detected → service scheduled" — Active (green dot)
-    2. **Feedstock Optimization** — "Input quality drop → yield stabilized" — Active (blue dot)
-    3. **Real-Time Process Control** — "pH deviation detected → auto correction" — Active (teal dot)
+2. **Add CSS animation delays** for cards 4-6 (nth-child 4, 5, 6) at 6s, 7.5s, 9s intervals
 
-### Animation sequence (CSS-only, looping)
-1. Data source icons fade in (staggered 0.3s each)
-2. Dashed lines draw from sources toward AI Engine with small dots traveling along them
-3. AI Engine pulses/glows
-4. Capability cards slide in from right one by one (staggered 1.5s apart)
-5. Loop resets after ~8s
+3. **Reduce card gap** from 12px to 8px and **reduce card padding** from `12px 16px` to `8px 12px` so all 6 cards fit vertically
 
-### Files to change
+4. **Add right connectors** for the 3 additional rows (6 connectors total matching 6 capability cards), reduce connector gap similarly
 
-1. **Create `src/components/slides/SlideBiogasAI.tsx`** — New slide component matching existing theme (uses `slide-inner`, `sec-label`, `slide-title`, CSS variables, DM Sans/DM Serif Display fonts)
-2. **Update `src/pages/Index.tsx`** — Import new component, insert at index 5 (after Plant Monitoring), bump total to 8, shift One Godown to index 6 and Contact to index 7
-
-### Theme alignment
-- White background with `hsl(var(--slide-bg))` / `hsl(var(--slide-bg2))` card
-- Blue accent `hsl(var(--slide-accent))` for AI Engine circle and label highlights
-- Font: DM Serif Display for title, DM Sans for body
-- Card borders: `1px solid hsl(var(--border))`
-- Consistent with existing slides' rounded-xl cards, subtle shadows
+5. **Add left data source connectors** — keep 3 sources but ensure vertical alignment still works with the taller right column
 
