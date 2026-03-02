@@ -1,58 +1,63 @@
 
 
-## YantraI Labs — Slide Presentation
+## Theme Update: Match YantrAI Website Style
 
-A fullscreen interactive slide presentation with navigation, styled after the reference design (light lavender/purple theme, DM Serif Display headings, clean minimal aesthetic).
+Based on the screenshot, the new theme is a **clean white** design with **blue accents** (matching yantrailabs.com), replacing the current lavender/indigo theme.
 
-### Design System
-- **Theme**: Light lavender background (#e8e8f0 / #f2f2f8), deep indigo accents (#5548d9), dark text (#1a1a2e)
-- **Fonts**: DM Serif Display for headings, DM Sans for body text
-- **Navigation**: Bottom-right pill with prev/next arrows + dot indicators, keyboard support (arrow keys), page counter top-right
+### New Design System (Style Guide for GIF creation)
 
-### Slides (8 total)
+**Colors:**
+- Background: `#FFFFFF` (pure white)
+- Secondary BG: `#F7F7F8` (very light gray, for cards/sections)
+- Text Primary: `#1A1A2E` (near-black)
+- Text Secondary / Muted: `#6B7280` (gray-500)
+- Accent / Brand: `#2563EB` (blue-600, matching "Turn images into AI" heading)
+- Accent Hover: `#1D4ED8` (blue-700)
+- Green indicator: `#16A34A`
+- Teal indicator: `#0891B2`
+- Border: `rgba(0, 0, 0, 0.06)`
+- CTA Button: `#1A1A2E` background, white text (pill-shaped, like "Get in touch")
 
-**Slide 1 — Introduction**
-- "YantraI Labs" in large serif, "Industrial Vision. Intelligent by Design." tagline
-- Subtitle: "AI systems that detect, analyze, and act in real time."
-- Clean hero layout similar to reference image
+**Typography:**
+- Headings: **DM Serif Display**, regular weight
+  - Slide title (H1): `48px` (clamp 36px-56px)
+  - Section title (H2): `36px` (clamp 28px-42px)
+  - Logo text: `20px`
+- Body: **DM Sans**, 300-400 weight
+  - Body text: `18px`
+  - Small / labels: `13px`
+  - Section labels (uppercase): `11px`, letter-spacing `0.15em`
+- Monospace (stats): **JetBrains Mono**, `14px`
 
-**Slide 2 — Multimodal AI Architecture**
-- Recreate the architecture diagram from uploaded image (3.png)
-- Input layer (Image, Video, Audio, Data) → Processing (Multimodal AI Layer) → Application outputs (Object Counting, Defect Detection, Pilferage Detection, Theft Detection, Predictive Maintenance)
-- Animated connecting lines/arrows
+**Box Structure:**
+- Card: `border-radius: 16px`, `border: 1px solid rgba(0,0,0,0.06)`, `background: #F7F7F8`, `padding: 24px`
+- Pill buttons: `border-radius: 9999px`, `padding: 12px 24px`
+- Image containers: `border-radius: 16px`, light `box-shadow: 0 4px 24px rgba(0,0,0,0.08)`
+- Architecture image frame: white border instead of dark
 
-**Slide 3 — Vision AI for Feed Monitoring**
-- Animated conveyor belt scene with biomass objects being scanned (from 4.html)
-- Stats panel showing detection metrics
-- CSS animations for conveyor movement and scan indicators
+**Layout Alignment:**
+- Max content width: `1100px`, centered
+- Slide padding: `40px` all sides
+- Grid: 2-column for hero/feature slides, single column for architecture/contact
+- Vertical gap between elements: `24px` standard, `12px` compact
+- Navigation pill: white background with subtle shadow
 
-**Slide 4 — Factory Sourcing & Dispatch AI**
-- Dark industrial theme section with animated scanner, conveyor, and dispatch items (from 5.html)
-- Items move along belt, get scanned with pass/fail indicators
-- Side panel with dispatch metrics
+### Implementation Changes
 
-**Slide 5 — Pilferage Detection**
-- Industrial scene with 4 rotating scenes: Normal Operation → Suspicious Activity → Confirmed Pilferage → Alert Communication (from 6.jsx)
-- SVG factory illustration with animated worker, detection boundaries, alerts
+1. **`src/index.css`** -- Update all CSS custom properties:
+   - `--slide-bg: 0 0% 100%` (white)
+   - `--slide-bg2: 240 5% 97%` (light gray)
+   - `--slide-bg3: 0 0% 100%`
+   - `--slide-text: 240 47% 14%` (keep dark)
+   - `--slide-muted: 220 9% 46%`
+   - `--slide-accent: 217 91% 60%` (blue)
+   - `--slide-accent2: 221 83% 53%` (slightly deeper blue)
+   - `--background: 0 0% 100%`
+   - `--card: 240 5% 97%`
+   - Update `.slide-container` background
+   - Update `.slide-nav` to white with shadow
 
-**Slide 6 — Plant Monitoring & Compliance**
-- Factory floor animation with PPE compliance, safety zone monitoring (from 7.jsx)
-- Use case cards: PPE Compliance, Safety Zone Violation, Maintenance Validation, Unauthorized Access, Shift Productivity
+2. **`SlideArchitecture.tsx`** -- Change image frame from dark `#2c2c3c` to light styling (white border, soft shadow)
 
-**Slide 7 — One Godown AI Showcase**
-- Embedded YouTube video preview/thumbnail linking to https://www.youtube.com/watch?v=IT6a_o3h5Mw
-- Multi-SKU detection use cases at retail point
-- Key highlights of seamless, faster Vision AI for retail
-
-**Slide 8 — Contact Us**
-- Large "Let's Talk" or "Get in Touch" heading
-- Email: rohit@yantrailabs.com
-- Mobile: +919123102267
-- YantraI Labs branding footer
-
-### Interactions
-- Arrow key and click navigation between slides
-- Smooth slide transitions (fade + horizontal shift)
-- All CSS animations run within each slide (conveyors, scanners, pulses)
-- Responsive design for desktop and tablet
+3. **All slide components** -- No structural changes needed; CSS variables will cascade the new colors automatically. SVG hardcoded colors in `SlideIntro.tsx` need updating from `hsl(245 62% 56%)` to blue `hsl(217 91% 60%)`.
 
