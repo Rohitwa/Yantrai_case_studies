@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import SlideIntro from '@/components/slides/SlideIntro';
 import SlideArchitecture from '@/components/slides/SlideArchitecture';
@@ -15,6 +15,7 @@ const TOTAL_SLIDES = 7;
 const Index = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState<'left' | 'right'>('right');
+  const touchStart = useRef<number | null>(null);
 
   const goTo = useCallback((idx: number) => {
     if (idx < 0 || idx >= TOTAL_SLIDES || idx === current) return;
@@ -33,6 +34,20 @@ const Index = () => {
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [next, prev]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStart.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart.current === null) return;
+    const diff = touchStart.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) next();
+      else prev();
+    }
+    touchStart.current = null;
+  };
 
   const slideClass = (idx: number) => {
     if (idx === current) return 'slide active';
@@ -70,7 +85,7 @@ const Index = () => {
   const total = allSlides.length;
 
   return (
-    <div className="slide-container">
+    <div className="slide-container" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       {allSlides.map((slide, idx) => (
         <div
           key={idx}

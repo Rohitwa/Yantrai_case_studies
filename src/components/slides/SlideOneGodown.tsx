@@ -3,14 +3,14 @@ const SlideOneGodown = () => {
     <div className="slide-inner">
       <div className="sec-label">Solutions we have delivered</div>
       <h2 className="slide-title">One Godown</h2>
-      <p className="text-sm mb-4 max-w-[700px]" style={{ color: 'hsl(var(--slide-muted))' }}>
+      <p className="text-xs sm:text-sm mb-4 max-w-[700px]" style={{ color: 'hsl(var(--slide-muted))' }}>
         Seamless, faster Vision AI for retail — multi-SKU detection at the point of sale, powered by YantraI Labs.
       </p>
 
       {/* YouTube Embed */}
       <div className="w-full max-w-[640px] mx-auto mb-4">
         <div
-          className="rounded-2xl overflow-hidden"
+          className="rounded-xl sm:rounded-2xl overflow-hidden"
           style={{
             border: '2px solid rgba(0,0,0,0.06)',
             boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
@@ -29,7 +29,7 @@ const SlideOneGodown = () => {
       </div>
 
       {/* Use cases */}
-      <div className="grid grid-cols-3 gap-3 w-full max-w-[640px] mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 w-full max-w-[640px] mx-auto">
         {[
           { icon: '📦', title: 'Multi-SKU Detection', desc: 'Identify multiple product types in a single frame at the retail counter.' },
           { icon: '⚡', title: 'Real-Time Processing', desc: 'Instant detection and counting with no lag at the point of sale.' },
@@ -37,15 +37,15 @@ const SlideOneGodown = () => {
         ].map((item, i) => (
           <div
             key={i}
-            className="rounded-2xl p-4 transition-all duration-300 hover:-translate-y-1"
+            className="rounded-xl sm:rounded-2xl p-3 sm:p-4 transition-all duration-300 hover:-translate-y-1"
             style={{
               background: 'hsl(var(--slide-bg2))',
               border: '1px solid hsl(var(--border))',
             }}
           >
-            <div className="text-3xl mb-3">{item.icon}</div>
-            <h3 className="font-serif text-lg mb-2" style={{ color: 'hsl(var(--slide-text))' }}>{item.title}</h3>
-            <p className="text-xs leading-relaxed" style={{ color: 'hsl(var(--slide-muted))' }}>{item.desc}</p>
+            <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">{item.icon}</div>
+            <h3 className="font-serif text-base sm:text-lg mb-1 sm:mb-2" style={{ color: 'hsl(var(--slide-text))' }}>{item.title}</h3>
+            <p className="text-[11px] sm:text-xs leading-relaxed" style={{ color: 'hsl(var(--slide-muted))' }}>{item.desc}</p>
           </div>
         ))}
       </div>

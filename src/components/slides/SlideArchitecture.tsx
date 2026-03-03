@@ -27,7 +27,7 @@ const SlideArchitecture = () => {
       </div>
 
       {/* Bottom cards */}
-      <div className="grid grid-cols-5 gap-3 mt-6">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 mt-4 sm:mt-6">
         {[
           { icon: '🔢', label: 'Object Counting' },
           { icon: '🔍', label: 'Defect Detection' },
@@ -37,14 +37,14 @@ const SlideArchitecture = () => {
         ].map((item, i) => (
           <div
             key={i}
-            className="rounded-xl p-4 text-center transition-all duration-200 hover:-translate-y-1"
+            className="rounded-xl p-3 sm:p-4 text-center transition-all duration-200 hover:-translate-y-1"
             style={{
               background: 'hsl(var(--slide-bg2))',
               border: '1px solid hsl(var(--border))',
             }}
           >
-            <div className="text-2xl mb-2">{item.icon}</div>
-            <div className="text-xs font-medium" style={{ color: 'hsl(var(--slide-text))' }}>{item.label}</div>
+            <div className="text-xl sm:text-2xl mb-1 sm:mb-2">{item.icon}</div>
+            <div className="text-[10px] sm:text-xs font-medium" style={{ color: 'hsl(var(--slide-text))' }}>{item.label}</div>
           </div>
         ))}
       </div>

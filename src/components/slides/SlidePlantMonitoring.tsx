@@ -86,13 +86,13 @@ const SlidePlantMonitoring = () => {
 
   return (
     <div style={{
-      height: '100vh',
+      minHeight: '100vh',
       background: 'linear-gradient(180deg, #f0f1f3 0%, #e4e5e7 100%)',
       fontFamily: '"IBM Plex Sans", system-ui, sans-serif',
-      padding: '20px 20px 16px',
+      padding: '16px',
       display: 'flex',
       flexDirection: 'column' as const,
-      overflow: 'hidden',
+      overflow: 'auto',
     }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap');
@@ -189,7 +189,7 @@ const SlidePlantMonitoring = () => {
         {/* Video Feed Area */}
         <div style={{
           position: 'relative',
-          height: '420px',
+          height: 'clamp(200px, 40vw, 420px)',
           background: '#000',
           overflow: 'hidden',
         }}>
@@ -260,9 +260,9 @@ const SlidePlantMonitoring = () => {
           {showAlert && (
             <div style={{
               position: 'absolute',
-              bottom: '16px',
-              right: '16px',
-              width: '280px',
+              bottom: '12px',
+              right: '12px',
+              width: 'min(280px, calc(100% - 24px))',
               background: 'rgba(255,255,255,0.98)',
               borderRadius: '8px',
               boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
@@ -391,7 +391,7 @@ const SlidePlantMonitoring = () => {
           alignItems: 'center',
           borderTop: '1px solid #333',
         }}>
-          <div style={{ display: 'flex', gap: '24px' }}>
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' as const }}>
             {[
               { label: 'Detection Accuracy', value: '98.7%' },
               { label: 'Response Time', value: '1.2s' },
@@ -436,8 +436,8 @@ const SlidePlantMonitoring = () => {
         
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
-          gap: '12px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+          gap: '10px',
         }}>
           {useCases.map((uc, i) => (
             <div key={i} style={{
