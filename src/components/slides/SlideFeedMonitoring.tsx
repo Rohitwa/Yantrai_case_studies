@@ -62,7 +62,7 @@ const SlideFeedMonitoring = () => {
   return (
     <div className="slide-inner">
       <div className="text-center mb-4">
-        <h2 className="slide-title">Vision AI for <em>Feed Monitoring</em></h2>
+        <h2 className="slide-title">Vision AI for <em className="italic font-normal text-[#0071e3]">Feed Monitoring</em></h2>
         <p className="text-xs" style={{ color: 'hsl(var(--slide-muted))' }}>
           Conveyor Feed → Detection → Weight Estimation → Count → Real-Time Insight
         </p>
@@ -107,7 +107,7 @@ const SlideFeedMonitoring = () => {
                 </div>
                 <div className="absolute left-0 right-0 h-[10px] bottom-0 z-[8]" style={{ background: 'linear-gradient(180deg, #2a3038 0%, #3d4550 30%, #5a6470 70%, #7a8490 100%)', borderRadius: '0 0 3px 3px' }} />
                 <div className="absolute flex justify-between" style={{ bottom: '-18px', left: '8%', right: '8%', height: '18px' }}>
-                  {[0,1,2,3,4].map(i => (
+                  {[0, 1, 2, 3, 4].map(i => (
                     <div key={i} style={{ width: '10px', height: '100%', background: 'linear-gradient(90deg, #3a4550, #5a6575, #3a4550)', borderRadius: '0 0 2px 2px' }} />
                   ))}
                 </div>

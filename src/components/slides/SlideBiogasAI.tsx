@@ -28,18 +28,18 @@ const SlideBiogasAI = () => {
         .biogas-source:nth-child(3) { animation-delay: 0.9s; }
         .biogas-dot {
           position: absolute; top: 50%; width: 6px; height: 6px;
-          border-radius: 50%; background: hsl(var(--slide-accent));
+          border-radius: 50%; background: #0071e3;
           transform: translateY(-50%);
           animation: biogasDotMove 2s linear infinite;
         }
         .biogas-connector { position: relative; flex: 1; height: 2px; margin: 0 8px; }
         .biogas-connector::before {
           content: ''; position: absolute; inset: 0;
-          border-top: 2px dashed hsl(var(--slide-accent) / 0.3);
+          border-top: 2px dashed rgba(0, 113, 227, 0.3);
         }
         .biogas-ring {
           position: absolute; border-radius: 50%;
-          border: 2px solid hsl(var(--slide-accent) / 0.2);
+          border: 2px solid rgba(0, 113, 227, 0.2);
           animation: biogasPulse 2.5s ease-in-out infinite;
         }
         .biogas-cap-card { opacity: 0; animation: biogasCardSlide 0.5s ease forwards; }
@@ -52,17 +52,18 @@ const SlideBiogasAI = () => {
       `}</style>
 
       <div className="sec-label">Biogas AI Platform</div>
-      <h2 className="slide-title">Turn plant data into <em>real-time intelligence.</em></h2>
-      <p className="text-xs sm:text-sm" style={{ color: 'hsl(var(--slide-muted))', marginTop: -12, marginBottom: 24 }}>
+      <h2 className="slide-title">Turn plant data into <em className="italic font-normal text-[#0071e3]">real-time intelligence.</em></h2>
+      <p className="text-xs sm:text-sm font-light" style={{ color: 'hsl(var(--slide-muted))', marginTop: -12, marginBottom: 24 }}>
         A unified AI layer that processes video feeds, sensor streams, and operational logs to drive autonomous plant decisions.
       </p>
 
       {/* Main diagram card */}
       <div style={{
-        background: 'hsl(var(--slide-bg2))',
-        border: '1px solid hsl(var(--border))',
-        borderRadius: 16, padding: '20px 16px',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+        background: 'rgba(255, 255, 255, 0.7)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid rgba(0, 0, 0, 0.08)',
+        borderRadius: 24, padding: '20px 16px',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
       }}>
         <div className="text-[9px] sm:text-[10px] tracking-[0.15em] uppercase text-center font-semibold mb-4 sm:mb-5" style={{ color: 'hsl(var(--slide-accent))' }}>
           Unified AI Intelligence Layer

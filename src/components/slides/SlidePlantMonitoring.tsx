@@ -60,7 +60,7 @@ const SlidePlantMonitoring = () => {
   const scene = scenes[currentScene];
 
   const getSeverityColor = (severity) => {
-    switch(severity) {
+    switch (severity) {
       case 'high': return { bg: '#dc2626', text: '#fff' };
       case 'medium': return { bg: '#f59e0b', text: '#1a1a1a' };
       default: return { bg: '#22c55e', text: '#fff' };
@@ -68,7 +68,7 @@ const SlidePlantMonitoring = () => {
   };
 
   const getAlertIcon = (type) => {
-    switch(type) {
+    switch (type) {
       case 'security': return '🛡️';
       case 'cleanliness': return '🗑️';
       case 'safety': return '⛑️';
@@ -129,7 +129,7 @@ const SlidePlantMonitoring = () => {
         margin: '0 auto 12px',
         textAlign: 'center',
       }}>
-        <h2 className="slide-title" style={{ marginBottom: 6 }}>Real-Time <em>Activity Monitoring</em></h2>
+        <h2 className="slide-title" style={{ marginBottom: 6 }}>Real-Time <em className="italic font-normal text-[#0071e3]">Activity Monitoring</em></h2>
         <p style={{
           fontSize: '13px',
           color: 'hsl(var(--slide-muted))',
@@ -194,8 +194,8 @@ const SlidePlantMonitoring = () => {
           overflow: 'hidden',
         }}>
           {/* Main Image */}
-          <img 
-            src={scene.image} 
+          <img
+            src={scene.image}
             alt={scene.title}
             style={{
               width: '100%',
@@ -433,31 +433,37 @@ const SlidePlantMonitoring = () => {
           letterSpacing: '0.1em',
           marginBottom: '16px',
         }}>More Use Cases</h2>
-        
+
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+          display: 'flex',
+          flexDirection: 'row',
           gap: '10px',
+          justifyContent: 'space-between',
         }}>
           {useCases.map((uc, i) => (
             <div key={i} style={{
+              flex: 1,
               background: '#fff',
               border: '1px solid #e5e7eb',
               borderRadius: '4px',
               padding: '16px 12px',
               transition: 'all 0.2s',
               cursor: 'default',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = '#b0b0b0';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
-              e.currentTarget.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = '#e5e7eb';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.transform = 'translateY(0)';
-            }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#b0b0b0';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = '#e5e7eb';
+                e.currentTarget.style.boxShadow = 'none';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
             >
               <div style={{ fontSize: '22px', marginBottom: '10px' }}>{uc.icon}</div>
               <div style={{

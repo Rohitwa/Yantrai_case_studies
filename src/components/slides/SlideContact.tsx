@@ -1,10 +1,11 @@
-import { Mail, Phone } from 'lucide-react';
+import { Mail, Phone, Globe } from 'lucide-react';
+import logoSmall from '@/assets/branding/yantrai_labs_logo.png';
 
 const SlideContact = () => {
   return (
     <div className="slide-inner flex flex-col items-center justify-center text-center gap-5 sm:gap-7" style={{ minHeight: 'calc(100vh - 160px)' }}>
       <h2
-        className="font-serif"
+        className="font-sans font-semibold"
         style={{
           fontSize: 'clamp(40px, 10vw, 80px)',
           color: 'hsl(var(--slide-text))',
@@ -45,15 +46,26 @@ const SlideContact = () => {
           <Phone className="w-4 h-4" style={{ color: 'hsl(var(--slide-accent))' }} />
           +91 91231 02267
         </a>
+
+        <a
+          href="https://www.yantrailabs.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2.5 rounded-full px-5 py-3 text-sm font-light transition-colors duration-300 no-underline"
+          style={{
+            background: 'hsl(var(--slide-bg2))',
+            border: '1px solid hsl(var(--border))',
+            color: 'hsl(var(--slide-text))',
+          }}
+        >
+          <Globe className="w-4 h-4" style={{ color: 'hsl(var(--slide-accent))' }} />
+          www.yantrailabs.com
+        </a>
       </div>
 
       {/* Footer logo */}
       <div className="flex items-center gap-2.5 mt-4 opacity-35">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="4" fill="hsl(var(--slide-accent))" opacity="0.6" />
-          <text x="6" y="17" fontSize="14" fontWeight="700" fill="white" fontFamily="DM Serif Display, serif">Y</text>
-        </svg>
-        <span className="font-serif text-lg" style={{ color: 'hsl(var(--slide-muted))' }}>YantraI Labs</span>
+        <img src={logoSmall} alt="YantrAI Labs" className="h-6 w-auto object-contain grayscale" />
       </div>
     </div>
   );

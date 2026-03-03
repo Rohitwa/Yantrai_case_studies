@@ -1,3 +1,5 @@
+import logoMain from '@/assets/branding/yantrai_labs_logo.png';
+
 const SlideIntro = () => {
   return (
     <div className="slide-inner flex flex-col items-start justify-center h-full">
@@ -7,12 +9,9 @@ const SlideIntro = () => {
       >
         {/* Left: Text */}
         <div className="flex flex-col justify-center gap-4 md:gap-6 text-center md:text-left items-center md:items-start">
-          <h1
-            className="font-serif leading-[1.1] tracking-tight"
-            style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)', letterSpacing: '-2px', color: 'hsl(var(--slide-text))' }}
-          >
-            Yantra<span style={{ color: 'hsl(var(--slide-accent2))' }}>I</span> Labs
-          </h1>
+          <div className="flex items-center mb-6 animate-fade-in">
+            <img src={logoMain} alt="YantrAI Labs Logo" className="h-16 md:h-20 w-auto object-contain" />
+          </div>
 
           <p
             className="font-light opacity-75 max-w-[600px] leading-relaxed"
@@ -31,13 +30,13 @@ const SlideIntro = () => {
           />
 
           <p
-            className="font-serif italic"
+            className="font-sans font-medium italic"
             style={{
               fontSize: 'clamp(0.85rem, 1.8vw, 1.25rem)',
-              background: 'linear-gradient(90deg, hsl(var(--slide-accent2)), hsl(var(--slide-teal)))',
+              background: 'linear-gradient(90deg, #0071e3, #0077ed)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
-              filter: 'drop-shadow(0 0 8px hsla(var(--slide-accent), 0.35))',
+              filter: 'drop-shadow(0 0 8px hsla(212, 100%, 45%, 0.35))',
             }}
           >
             AI systems that detect, analyze, and act in real time.
@@ -86,7 +85,7 @@ const SlideIntro = () => {
               <line x1="300" y1="120" x2="200" y2="120" stroke="hsl(217 91% 60%)" strokeWidth="0.5" strokeOpacity="0.2" />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-serif tracking-tighter" style={{ color: 'hsl(var(--slide-accent))', opacity: 0.15, fontSize: 'clamp(60px, 15vw, 120px)' }}>Y</span>
+              <span className="font-sans font-bold tracking-tighter" style={{ color: 'hsl(var(--slide-accent))', opacity: 0.15, fontSize: 'clamp(60px, 15vw, 120px)' }}>Y</span>
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@ const SlideFactoryDispatch = ({ variant = 'sourcing' }: Props) => {
       <div className="w-full" style={{ fontFamily: '"JetBrains Mono", monospace' }}>
         {/* Header */}
         <div className="flex justify-between items-center mb-4 sm:mb-6">
-          <div className="flex items-center gap-2 sm:gap-2.5 text-[14px] sm:text-[20px] tracking-[2px] sm:tracking-[3px] uppercase" style={{ fontFamily: '"DM Serif Display", serif', color: '#c4cad4' }}>
+          <div className="flex items-center gap-2 sm:gap-2.5 text-[14px] sm:text-[20px] tracking-[2px] sm:tracking-[3px] uppercase" style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, color: '#0071e3' }}>
             <div className="w-5 h-5 sm:w-7 sm:h-7 flex items-center justify-center" style={{ border: '2px solid #8b9dc3' }}>
               <div className="w-2 h-2 sm:w-3 sm:h-3" style={{ border: '2px solid #f97316', animation: 'statusPulse 2s infinite' }} />
             </div>
@@ -74,9 +74,9 @@ const SlideFactoryDispatch = ({ variant = 'sourcing' }: Props) => {
                         height: item.shape === 'drum' ? '42px' : '36px',
                         background:
                           item.shape === 'carton' ? 'linear-gradient(135deg, #d97706 0%, #b45309 50%, #92400e 100%)' :
-                          item.shape === 'pallet' ? 'linear-gradient(180deg, #78716c 0%, #57534e 100%)' :
-                          item.shape === 'crate' ? 'linear-gradient(180deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%)' :
-                          'linear-gradient(90deg, #4b5563 0%, #9ca3af 30%, #d1d5db 50%, #9ca3af 70%, #4b5563 100%)',
+                            item.shape === 'pallet' ? 'linear-gradient(180deg, #78716c 0%, #57534e 100%)' :
+                              item.shape === 'crate' ? 'linear-gradient(180deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%)' :
+                                'linear-gradient(90deg, #4b5563 0%, #9ca3af 30%, #d1d5db 50%, #9ca3af 70%, #4b5563 100%)',
                       }}
                     />
                     <div
@@ -149,7 +149,7 @@ const SlideFactoryDispatch = ({ variant = 'sourcing' }: Props) => {
             ].map((uc, i) => (
               <div key={i} className="rounded-md p-3 sm:p-4 transition-all duration-200 hover:-translate-y-0.5" style={{ background: '#1a1d21', border: '1px solid rgba(139,157,195,0.12)' }}>
                 <div className="text-lg sm:text-xl mb-1.5 sm:mb-2.5">{uc.icon}</div>
-                <div className="text-[12px] sm:text-[14px] tracking-wide mb-1 sm:mb-1.5 text-white" style={{ fontFamily: '"DM Serif Display", serif' }}>{uc.name}</div>
+                <div className="text-[12px] sm:text-[14px] font-semibold tracking-wide mb-1 sm:mb-1.5 text-white" style={{ fontFamily: 'Inter, sans-serif' }}>{uc.name}</div>
                 <div className="text-[8px] sm:text-[9px]" style={{ color: '#22c55e' }}>{uc.metric}</div>
               </div>
             ))}

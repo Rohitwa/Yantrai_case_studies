@@ -4,7 +4,7 @@ const SlideOneGodown = () => {
       <div className="sec-label">Solutions we have delivered</div>
       <h2 className="slide-title">One Godown</h2>
       <p className="text-xs sm:text-sm mb-4 max-w-[700px]" style={{ color: 'hsl(var(--slide-muted))' }}>
-        Seamless, faster Vision AI for retail — multi-SKU detection at the point of sale, powered by YantraI Labs.
+        Seamless, faster Vision AI for retail — multi-SKU detection at the point of sale, powered by YantrAI Labs.
       </p>
 
       {/* YouTube Embed */}
@@ -44,7 +44,7 @@ const SlideOneGodown = () => {
             }}
           >
             <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">{item.icon}</div>
-            <h3 className="font-serif text-base sm:text-lg mb-1 sm:mb-2" style={{ color: 'hsl(var(--slide-text))' }}>{item.title}</h3>
+            <h3 className="font-sans font-semibold text-base sm:text-lg mb-1 sm:mb-2" style={{ color: 'hsl(var(--slide-text))' }}>{item.title}</h3>
             <p className="text-[11px] sm:text-xs leading-relaxed" style={{ color: 'hsl(var(--slide-muted))' }}>{item.desc}</p>
           </div>
         ))}
