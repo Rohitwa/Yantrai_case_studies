@@ -140,14 +140,14 @@ const SlidePlantMonitoring = () => {
       {/* Main Display */}
       <div style={{
         maxWidth: '960px',
+        width: '100%',
         margin: '0 auto 16px',
-        flex: '1',
-        minHeight: 0,
         background: '#1a1d21',
         borderRadius: '8px',
         border: '1px solid #333',
         boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
         overflow: 'hidden',
+        flexShrink: 0,
       }}>
         {/* Top Bar */}
         <div style={{
