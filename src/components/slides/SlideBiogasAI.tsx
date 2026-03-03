@@ -22,9 +22,6 @@ const SlideBiogasAI = () => {
           from { opacity: 0; transform: translateX(30px); }
           to { opacity: 1; transform: translateX(0); }
         }
-        @keyframes biogasDash {
-          to { stroke-dashoffset: -12; }
-        }
         .biogas-source { opacity: 0; animation: biogasFadeIn 0.5s ease forwards; }
         .biogas-source:nth-child(1) { animation-delay: 0.3s; }
         .biogas-source:nth-child(2) { animation-delay: 0.6s; }
@@ -56,7 +53,7 @@ const SlideBiogasAI = () => {
 
       <div className="sec-label">Biogas AI Platform</div>
       <h2 className="slide-title">Turn plant data into <em>real-time intelligence.</em></h2>
-      <p style={{ color: 'hsl(var(--slide-muted))', fontSize: 14, marginTop: -12, marginBottom: 24 }}>
+      <p className="text-xs sm:text-sm" style={{ color: 'hsl(var(--slide-muted))', marginTop: -12, marginBottom: 24 }}>
         A unified AI layer that processes video feeds, sensor streams, and operational logs to drive autonomous plant decisions.
       </p>
 
@@ -64,14 +61,15 @@ const SlideBiogasAI = () => {
       <div style={{
         background: 'hsl(var(--slide-bg2))',
         border: '1px solid hsl(var(--border))',
-        borderRadius: 16, padding: '32px 28px',
+        borderRadius: 16, padding: '20px 16px',
         boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
       }}>
-        <div style={{ fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'hsl(var(--slide-accent))', fontWeight: 600, marginBottom: 20, textAlign: 'center' }}>
+        <div className="text-[9px] sm:text-[10px] tracking-[0.15em] uppercase text-center font-semibold mb-4 sm:mb-5" style={{ color: 'hsl(var(--slide-accent))' }}>
           Unified AI Intelligence Layer
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
+        {/* Desktop: horizontal flow */}
+        <div className="hidden md:flex items-center gap-0">
           {/* Left — Data Sources */}
           <div style={{ width: 160, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 20 }}>
             {[
@@ -146,6 +144,74 @@ const SlideBiogasAI = () => {
                   <span style={{ fontSize: 9, color: c.color, fontWeight: 500, marginLeft: 'auto' }}>Active</span>
                 </div>
                 <div style={{ fontSize: 11, color: 'hsl(var(--slide-muted))' }}>{c.desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile/Tablet: stacked vertical layout */}
+        <div className="flex flex-col gap-4 md:hidden">
+          {/* Data Sources row */}
+          <div className="flex gap-2 justify-center flex-wrap">
+            {[
+              { icon: <Camera size={16} />, label: 'Camera' },
+              { icon: <Wifi size={16} />, label: 'IoT Sensors' },
+              { icon: <List size={16} />, label: 'Ops Logs' },
+            ].map((s, i) => (
+              <div key={i} className="flex items-center gap-2 rounded-lg px-3 py-2" style={{
+                background: 'hsl(var(--slide-bg))', border: '1px solid hsl(var(--border))',
+              }}>
+                <div style={{ color: 'hsl(var(--slide-accent))' }}>{s.icon}</div>
+                <span className="text-[11px] font-medium" style={{ color: 'hsl(var(--slide-text))' }}>{s.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Arrow down */}
+          <div className="flex justify-center">
+            <div className="w-0.5 h-6" style={{ background: 'hsl(var(--slide-accent) / 0.3)' }} />
+          </div>
+
+          {/* AI Engine */}
+          <div className="flex justify-center">
+            <div className="relative w-16 h-16">
+              <div className="biogas-ring" style={{ inset: 0 }} />
+              <div className="biogas-ring" style={{ inset: 8, animationDelay: '0.5s' }} />
+              <div style={{
+                position: 'absolute', inset: 16, borderRadius: '50%',
+                background: 'hsl(var(--slide-accent))',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 0 20px hsl(var(--slide-accent) / 0.4)',
+              }}>
+                <span className="text-[8px] font-bold text-white">AI</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Arrow down */}
+          <div className="flex justify-center">
+            <div className="w-0.5 h-6" style={{ background: 'hsl(var(--slide-accent) / 0.3)' }} />
+          </div>
+
+          {/* Capabilities grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {[
+              { title: 'Predictive Maintenance', desc: 'Failure risk → service scheduled', color: 'hsl(var(--slide-green))' },
+              { title: 'Feedstock Optimization', desc: 'Quality drop → yield stabilized', color: 'hsl(var(--slide-accent))' },
+              { title: 'Real-Time Process Control', desc: 'pH deviation → auto correction', color: 'hsl(var(--slide-teal))' },
+              { title: 'Gas Leak & Safety', desc: 'Leak detected → emergency protocol', color: 'hsl(var(--slide-green))' },
+              { title: 'Resource Planning', desc: 'Usage forecast → allocation optimized', color: 'hsl(var(--slide-accent))' },
+              { title: 'Quality Control', desc: 'Output anomaly → process adjusted', color: 'hsl(var(--slide-teal))' },
+            ].map((c, i) => (
+              <div key={i} className="rounded-lg p-2.5" style={{
+                background: 'hsl(var(--slide-bg))', border: '1px solid hsl(var(--border))',
+              }}>
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-[6px] h-[6px] rounded-full" style={{ background: c.color, boxShadow: `0 0 6px ${c.color}` }} />
+                  <span className="text-[11px] font-semibold" style={{ color: 'hsl(var(--slide-text))' }}>{c.title}</span>
+                  <span className="text-[8px] ml-auto font-medium" style={{ color: c.color }}>Active</span>
+                </div>
+                <div className="text-[10px]" style={{ color: 'hsl(var(--slide-muted))' }}>{c.desc}</div>
               </div>
             ))}
           </div>

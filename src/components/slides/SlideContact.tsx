@@ -2,27 +2,27 @@ import { Mail, Phone } from 'lucide-react';
 
 const SlideContact = () => {
   return (
-    <div className="slide-inner flex flex-col items-center justify-center text-center gap-7" style={{ minHeight: 'calc(100vh - 160px)' }}>
+    <div className="slide-inner flex flex-col items-center justify-center text-center gap-5 sm:gap-7" style={{ minHeight: 'calc(100vh - 160px)' }}>
       <h2
         className="font-serif"
         style={{
-          fontSize: '80px',
+          fontSize: 'clamp(40px, 10vw, 80px)',
           color: 'hsl(var(--slide-text))',
-          letterSpacing: '-3px',
+          letterSpacing: '-2px',
           lineHeight: 1,
         }}
       >
         Let's Talk
       </h2>
 
-      <p className="text-base font-light" style={{ color: 'hsl(var(--slide-muted))' }}>
+      <p className="text-sm sm:text-base font-light" style={{ color: 'hsl(var(--slide-muted))' }}>
         Ready to bring AI-powered vision to your operations?
       </p>
 
-      <div className="flex flex-wrap gap-3 justify-center">
+      <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center w-full px-4 sm:px-0">
         <a
           href="mailto:rohit@yantrailabs.com"
-          className="flex items-center gap-2.5 rounded-full px-5 py-3 text-sm font-light transition-colors duration-300 no-underline"
+          className="flex items-center justify-center gap-2.5 rounded-full px-5 py-3 text-sm font-light transition-colors duration-300 no-underline"
           style={{
             background: 'hsl(var(--slide-bg2))',
             border: '1px solid hsl(var(--border))',
@@ -35,7 +35,7 @@ const SlideContact = () => {
 
         <a
           href="tel:+919123102267"
-          className="flex items-center gap-2.5 rounded-full px-5 py-3 text-sm font-light transition-colors duration-300 no-underline"
+          className="flex items-center justify-center gap-2.5 rounded-full px-5 py-3 text-sm font-light transition-colors duration-300 no-underline"
           style={{
             background: 'hsl(var(--slide-bg2))',
             border: '1px solid hsl(var(--border))',

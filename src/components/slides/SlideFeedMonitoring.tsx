@@ -69,9 +69,9 @@ const SlideFeedMonitoring = () => {
       </div>
 
       <div className="rounded-xl overflow-hidden" style={{ background: 'hsl(var(--slide-bg2))', border: '1px solid hsl(var(--border))' }}>
-        <div className="flex gap-2.5 p-2.5" style={{ minHeight: '300px' }}>
+        <div className="flex flex-col sm:flex-row gap-2.5 p-2.5" style={{ minHeight: '250px' }}>
           {/* Scene - Camera View */}
-          <div className="flex-1 rounded-lg relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #1a2a3a 0%, #0f1a24 50%, #080e14 100%)', boxShadow: 'inset 0 0 100px rgba(0,0,0,0.5)' }}>
+          <div className="flex-1 rounded-lg relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #1a2a3a 0%, #0f1a24 50%, #080e14 100%)', boxShadow: 'inset 0 0 100px rgba(0,0,0,0.5)', minHeight: '200px' }}>
             {/* Industrial lighting */}
             <div className="absolute pointer-events-none" style={{ top: '-30%', left: '30%', width: '40%', height: '60%', background: 'radial-gradient(ellipse, rgba(255,250,230,0.04) 0%, transparent 70%)' }} />
 
@@ -99,18 +99,13 @@ const SlideFeedMonitoring = () => {
 
             {/* Conveyor System */}
             <div className="absolute left-0 right-0" style={{ bottom: '6%', height: '68%' }}>
-              {/* Belt frame */}
               <div className="absolute rounded" style={{ bottom: '8%', left: '-2%', right: '-2%', height: '50%', background: 'linear-gradient(180deg, #2d3a47 0%, #1f2a35 25%, #151d25 60%, #0a1015 100%)', boxShadow: '0 10px 25px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.03)' }}>
-                {/* Top rail */}
                 <div className="absolute left-0 right-0 h-[10px] top-0 z-[8]" style={{ background: 'linear-gradient(180deg, #7a8490 0%, #5a6470 30%, #3d4550 70%, #2a3038 100%)', borderRadius: '3px 3px 0 0', boxShadow: '0 3px 8px rgba(0,0,0,0.5)' }} />
-                {/* Roller bed */}
                 <div className="absolute left-0 right-0 overflow-hidden" style={{ top: '10px', bottom: '10px', background: '#080c10' }}>
                   <div className="absolute inset-0" style={{ background: 'repeating-linear-gradient(90deg, #121a22 0px, #1a252f 2px, #243342 5px, #2e4052 8px, #3a5065 10px, #2e4052 12px, #243342 15px, #1a252f 18px, #121a22 20px, transparent 20px, transparent 36px)', animation: 'feedRollMove 0.45s linear infinite' }} />
                   <div className="absolute inset-0" style={{ background: 'repeating-linear-gradient(90deg, transparent 0px, transparent 6px, rgba(255,255,255,0.06) 8px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.06) 12px, transparent 14px, transparent 36px)', animation: 'feedRollMove 0.45s linear infinite' }} />
                 </div>
-                {/* Bottom rail */}
                 <div className="absolute left-0 right-0 h-[10px] bottom-0 z-[8]" style={{ background: 'linear-gradient(180deg, #2a3038 0%, #3d4550 30%, #5a6470 70%, #7a8490 100%)', borderRadius: '0 0 3px 3px' }} />
-                {/* Supports */}
                 <div className="absolute flex justify-between" style={{ bottom: '-18px', left: '8%', right: '8%', height: '18px' }}>
                   {[0,1,2,3,4].map(i => (
                     <div key={i} style={{ width: '10px', height: '100%', background: 'linear-gradient(90deg, #3a4550, #5a6575, #3a4550)', borderRadius: '0 0 2px 2px' }} />
@@ -128,13 +123,10 @@ const SlideFeedMonitoring = () => {
                   { cls: 'p5', delay: '-4.8s', bottom: '32%', w: 62, h: 48, bg: 'linear-gradient(158deg, #887050 0%, #786042 25%, #685235 55%, #584428 80%, #48361c 100%)' },
                 ].map(p => (
                   <div key={p.cls} className="absolute" style={{ bottom: p.bottom, animation: `feedPalletMove 6s linear infinite`, animationDelay: p.delay }}>
-                    {/* Weight tag */}
                     <div className="absolute text-white whitespace-nowrap z-[15]" style={{ top: '-20px', left: '50%', transform: 'translateX(-50%)', background: '#22c55e', fontSize: '9px', fontWeight: 700, padding: '2px 8px', borderRadius: '3px', boxShadow: '0 2px 6px rgba(0,0,0,0.4)' }}>
                       {palletWeights[p.cls]} kg
                     </div>
-                    {/* Detection box */}
                     <div className="absolute" style={{ inset: '-5px', border: '2px solid #22c55e', borderRadius: '3px', boxShadow: '0 0 14px rgba(34,197,94,0.6)' }} />
-                    {/* Pallet body */}
                     <div style={{ position: 'relative', transform: 'perspective(300px) rotateX(-8deg) rotateY(-10deg)' }}>
                       <div className="relative overflow-hidden" style={{ width: `${p.w}px`, height: `${p.h}px`, background: p.bg, borderRadius: '4px 4px 2px 2px', boxShadow: '5px 6px 18px rgba(0,0,0,0.5), inset -4px -4px 12px rgba(0,0,0,0.3), inset 3px 3px 10px rgba(255,255,255,0.08)' }}>
                         <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 20%), radial-gradient(circle at 70% 60%, rgba(255,255,255,0.06) 0%, transparent 25%), radial-gradient(circle at 40% 80%, rgba(0,0,0,0.15) 0%, transparent 20%)' }} />
@@ -148,7 +140,7 @@ const SlideFeedMonitoring = () => {
           </div>
 
           {/* Stats Panel */}
-          <div className="rounded-lg p-2 flex flex-col overflow-hidden" style={{ width: '175px', background: 'white', border: '1px solid hsl(var(--border))' }}>
+          <div className="rounded-lg p-2 flex flex-col overflow-hidden sm:w-[175px] w-full" style={{ background: 'white', border: '1px solid hsl(var(--border))' }}>
             <div className="flex justify-between items-center pb-1.5 mb-1.5" style={{ borderBottom: '1px solid #f3f4f6' }}>
               <span style={{ fontSize: '7px', fontWeight: 600, color: '#6b7280', textTransform: 'uppercase' }}>Metrics</span>
               <div className="flex items-center gap-[3px] rounded-full" style={{ background: 'rgba(34,197,94,0.1)', padding: '2px 5px' }}>
@@ -157,7 +149,6 @@ const SlideFeedMonitoring = () => {
               </div>
             </div>
 
-            {/* Time frame buttons */}
             <div className="mb-1.5">
               <div style={{ fontSize: '6px', color: '#6b7280', textTransform: 'uppercase', marginBottom: '3px' }}>Time Frame</div>
               <div className="flex gap-[2px] flex-wrap">
@@ -181,18 +172,18 @@ const SlideFeedMonitoring = () => {
               </div>
             </div>
 
-            <div className="flex-1 flex flex-col gap-1.5 overflow-hidden">
-              <div className="rounded p-1.5" style={{ background: '#f9fafb', border: '1px solid #f3f4f6' }}>
+            <div className="flex-1 flex flex-row sm:flex-col gap-1.5 overflow-hidden">
+              <div className="rounded p-1.5 flex-1 sm:flex-none" style={{ background: '#f9fafb', border: '1px solid #f3f4f6' }}>
                 <div style={{ fontSize: '6px', color: '#6b7280', textTransform: 'uppercase' }}>Feed Pallet Count</div>
                 <div className="tabular-nums" style={{ fontSize: '15px', fontWeight: 700, color: '#1f2937', lineHeight: 1.1 }}>{fmt(baseCount)}</div>
                 <div style={{ fontSize: '6px', color: '#9ca3af' }}>in last {d.l}</div>
               </div>
-              <div className="rounded p-1.5" style={{ background: '#f9fafb', border: '1px solid #f3f4f6' }}>
+              <div className="rounded p-1.5 flex-1 sm:flex-none" style={{ background: '#f9fafb', border: '1px solid #f3f4f6' }}>
                 <div style={{ fontSize: '6px', color: '#6b7280', textTransform: 'uppercase' }}>Total Feed Weight</div>
                 <div className="tabular-nums" style={{ fontSize: '15px', fontWeight: 700, color: '#1f2937', lineHeight: 1.1 }}>{fmt(baseWeight)}<span style={{ fontSize: '8px', color: '#6b7280' }}>kg</span></div>
                 <div style={{ fontSize: '6px', color: '#9ca3af' }}>in last {d.l}</div>
               </div>
-              <div className="flex items-center gap-1.5 rounded p-1.5 mt-auto" style={{ background: 'rgba(34,197,94,0.08)' }}>
+              <div className="flex items-center gap-1.5 rounded p-1.5 sm:mt-auto" style={{ background: 'rgba(34,197,94,0.08)' }}>
                 <div className="flex items-center justify-center rounded-full" style={{ width: '15px', height: '15px', background: '#22c55e' }}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-2 h-2"><path d="M13 17l5-5-5-5M6 17l5-5-5-5" /></svg>
                 </div>
@@ -207,13 +198,13 @@ const SlideFeedMonitoring = () => {
       </div>
 
       {/* Use case cards */}
-      <div className="grid grid-cols-4 gap-3 mt-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-3 sm:mt-4">
         {['Real-Time Weight & Count', 'Rate Drop & Jam Alerts', 'Foreign Object Detection', 'Safety & Intrusion Alerts'].map((title, i) => (
-          <div key={i} className="flex items-center gap-3 rounded-lg p-3.5 transition-shadow hover:shadow-md" style={{ background: 'white', border: '1px solid hsl(var(--border))' }}>
-            <div className="w-7 h-7 rounded-md flex items-center justify-center text-[11px] font-semibold flex-shrink-0" style={{ background: '#f3f4f6', color: '#4b5563' }}>
+          <div key={i} className="flex items-center gap-2 sm:gap-3 rounded-lg p-2.5 sm:p-3.5 transition-shadow hover:shadow-md" style={{ background: 'white', border: '1px solid hsl(var(--border))' }}>
+            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md flex items-center justify-center text-[10px] sm:text-[11px] font-semibold flex-shrink-0" style={{ background: '#f3f4f6', color: '#4b5563' }}>
               {String(i + 1).padStart(2, '0')}
             </div>
-            <div className="text-[13px] font-medium" style={{ color: '#374151' }}>{title}</div>
+            <div className="text-[11px] sm:text-[13px] font-medium" style={{ color: '#374151' }}>{title}</div>
           </div>
         ))}
       </div>
