@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yantra AI Solutions — Vision AI for Indian Retail</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d1117;
+    --bg: #f7f6f2;
+    --white: #ffffff;
+    --accent: #1a56db;
+    --accent2: #d97706;
+    --accent3: #e3a008;
+    --accent4: #e02424;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --card: #ffffff;
+    --tag-bg: #eef2ff;
+    --tag-fg: #3730a3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Sora', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ─── HERO ──────────────────────────────────────── */
+  .hero {
+    background: var(--ink);
+    color: var(--white);
+    padding: 64px 60px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(217,119,6,0.22) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fbbf24;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.15;
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: #fbbf24; }
+  .hero-sub {
+    font-size: 16px;
+    color: #9ca3af;
+    max-width: 600px;
+    font-weight: 300;
+    margin-bottom: 36px;
+  }
+  .hero-badges {
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #e5e7eb;
+    padding: 6px 14px;
+    border-radius: 40px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* ─── LAYOUT ─────────────────────────────────────── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .section-desc {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 620px;
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
+
+  /* ─── KPI STRIP ──────────────────────────────────── */
+  .kpi-strip {
+    background: var(--ink);
+    padding: 0;
+  }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .kpi-item {
+    padding: 36px 32px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    color: var(--white);
+  }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-num {
+    font-size: 44px;
+    font-weight: 800;
+    color: #fbbf24;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .kpi-label {
+    font-size: 13px;
+    color: #9ca3af;
+    font-weight: 400;
+  }
+
+  /* ─── ABOUT GRID ─────────────────────────────────── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .about-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .about-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .icon-blue { background: #dbeafe; }
+  .icon-green { background: #d1fae5; }
+  .icon-yellow { background: #fef3c7; }
+  .icon-red { background: #fee2e2; }
+  .icon-purple { background: #ede9fe; }
+  .icon-pink { background: #fce7f3; }
+  .icon-amber { background: #fef3c7; }
+
+  /* ─── USE CASE CARDS ─────────────────────────────── */
+  .usecase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .uc-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .uc-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .uc-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .uc-card.blue::after   { background: var(--accent); }
+  .uc-card.amber::after  { background: #d97706; }
+  .uc-card.yellow::after { background: var(--accent3); }
+  .uc-card.red::after    { background: var(--accent4); }
+  .uc-card.purple::after { background: #7c3aed; }
+  .uc-card.teal::after   { background: #0891b2; }
+  .uc-card.orange::after { background: #ea580c; }
+  .uc-card.indigo::after { background: #4f46e5; }
+
+  .uc-emoji { font-size: 26px; margin-bottom: 12px; }
+  .uc-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .uc-desc { font-size: 12px; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+  .uc-solution {
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .uc-kpi {
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .kpi-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  /* ─── IAAS FLOWCHART ─────────────────────────────── */
+  .iaas-wrap {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 40px;
+    color: var(--white);
+  }
+  .iaas-title-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  .iaas-title-bar h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .iaas-badge {
+    background: rgba(96,165,250,0.15);
+    border: 1px solid rgba(96,165,250,0.3);
+    color: #93c5fd;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 1px;
+  }
+  .iaas-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .iaas-row {
+    display: flex;
+    align-items: stretch;
+    gap: 4px;
+  }
+  .iaas-layer-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 9px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #6b7280;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+  }
+  .iaas-cells {
+    display: flex;
+    flex: 1;
+    gap: 4px;
+  }
+  .iaas-cell {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .iaas-cell.highlight {
+    background: rgba(59,130,246,0.2);
+    border-color: rgba(96,165,250,0.35);
+    color: #bfdbfe;
+  }
+  .iaas-cell.green-hl {
+    background: rgba(16,185,129,0.18);
+    border-color: rgba(52,211,153,0.3);
+    color: #a7f3d0;
+  }
+  .iaas-cell.yellow-hl {
+    background: rgba(245,158,11,0.18);
+    border-color: rgba(251,191,36,0.3);
+    color: #fde68a;
+  }
+  .iaas-cell .cell-icon { font-size: 16px; margin-bottom: 2px; }
+  .iaas-cell .cell-label { font-size: 11px; font-weight: 700; }
+  .iaas-cell .cell-sub { font-size: 10px; opacity: 0.7; font-family: 'IBM Plex Mono', monospace; }
+
+  .iaas-arrow-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 4px 0;
+  }
+  .iaas-down-arrow {
+    color: #374151;
+    font-size: 20px;
+    flex: 1;
+    text-align: center;
+  }
+
+  /* ─── BENEFITS ───────────────────────────────────── */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .benefit-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .benefit-num {
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .benefit-label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .benefit-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .bar-track {
+    margin-top: 14px;
+    background: var(--border);
+    border-radius: 4px;
+    height: 6px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+  }
+
+  /* ─── TECH STACK ─────────────────────────────────── */
+  .tech-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .tech-tag {
+    background: var(--tag-bg);
+    color: var(--tag-fg);
+    border: 1px solid #c7d2fe;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .tech-tag.green {
+    background: #ecfdf5;
+    color: #065f46;
+    border-color: #a7f3d0;
+  }
+  .tech-tag.yellow {
+    background: #fffbeb;
+    color: #92400e;
+    border-color: #fde68a;
+  }
+  .tech-group-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+
+  /* ─── URGENCY / FOOTER ───────────────────────────── */
+  .urgency-band {
+    background: #fffbeb;
+    border: 1.5px solid #fde68a;
+    border-radius: 12px;
+    padding: 28px 32px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .urgency-icon { font-size: 28px; flex-shrink: 0; }
+  .urgency-body h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .urgency-body p { font-size: 13px; color: #78350f; line-height: 1.6; }
+  .phase-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .phase-item {
+    flex: 1;
+    background: var(--white);
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 12px;
+  }
+  .phase-item strong { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+
+  .doc-footer {
+    background: var(--ink);
+    color: #6b7280;
+    padding: 28px 40px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .doc-footer span { font-weight: 600; color: #9ca3af; }
+
+  /* ─── RESPONSIVE ─────────────────────────────────── */
+  @media (max-width: 900px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .usecase-grid { grid-template-columns: repeat(2, 1fr); }
+    .benefits-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 24px; }
+    .hero h1 { font-size: 28px; }
+    .container { padding: 0 20px; }
+    .phase-row { flex-direction: column; }
+  }
+
+  @media print {
+    body { background: white; }
+    .hero { -webkit-print-color-adjust: exact; }
+    .kpi-strip { -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Vision AI · Retail · Yantra AI Solutions</p>
+    <h1>Smarter Floors. Zero Shrinkage.<br><span>Retail Intelligence</span> at Every Aisle.</h1>
+    <p class="hero-sub">How Yantra AI Solutions is transforming Indian retail with loss prevention, customer analytics, and queue intelligence — all on one platform.</p>
+    <div class="hero-badges">
+      <span class="badge">🛒 Loss Prevention AI</span>
+      <span class="badge">📊 Customer Behaviour Analytics</span>
+      <span class="badge">⚡ Real-time Queue Intelligence</span>
+      <span class="badge">🏪 Shelf & Product AI</span>
+      <span class="badge">🔬 IIT/NIT Founders</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ KPI STRIP ══════════════════════════════════════════ -->
+<div class="kpi-strip">
+  <div class="kpi-grid">
+    <div class="kpi-item">
+      <div class="kpi-num">~60%</div>
+      <div class="kpi-label">Reduction in retail shrinkage (indicative)</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">⚡ Real-time</div>
+      <div class="kpi-label">Shoplifting & loss prevention alerts</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">~35%</div>
+      <div class="kpi-label">Reduction in checkout queue abandonment</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">Multi</div>
+      <div class="kpi-label">Multi-Use Cases across one platform</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT YANTRA ═══════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Company Overview</p>
+    <h2 class="section-title">Who is Yantra AI Solutions?</h2>
+    <p class="section-desc">An AI-first team bridging research and real-world retail operations, built by engineers who understand both technology and the challenges of modern commerce.</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3><span class="icon icon-blue">🎓</span> Founder Background</h3>
+        <p style="font-size:13px; color:var(--muted);">Founders from <strong>IIT & NIT</strong> backgrounds with hands-on experience in AI research and operations systems. Prototype built on real-world retail simulations.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-green">🏗️</span> Industry-Grade Hardware</h3>
+        <p style="font-size:13px; color:var(--muted);">Retail-grade cameras and edge-compute devices are pre-configured and shipped. Store managers get intuitive dashboards — no deep technical skills required.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-yellow">🧩</span> Modular Platform</h3>
+        <p style="font-size:13px; color:var(--muted);">Start with one use case (e.g., loss prevention) and expand progressively to customer analytics, queue intelligence, and inventory AI at your own pace.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-purple">📡</span> Integration-Ready</h3>
+        <p style="font-size:13px; color:var(--muted);">Built to connect with existing <strong>POS systems, ERP platforms, and store management apps</strong> with minimal IT effort and fast deployment timelines.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ USE CASES ══════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Platform Capabilities</p>
+    <h2 class="section-title">Multi-Use Cases. One Integrated Platform.</h2>
+    <p class="section-desc">Each module addresses a distinct retail pain point — from shrinkage and queue abandonment to shelf performance and customer journey intelligence.</p>
+
+    <div class="usecase-grid">
+
+      <div class="uc-card blue">
+        <div class="uc-emoji">🛒</div>
+        <div class="uc-title">Loss Prevention & Shoplifting AI</div>
+        <div class="uc-desc">AI detects concealment behaviour, unusual item handling, and suspicious movement patterns in real time — alerting loss prevention staff before exit. Benchmark data suggests ~60% shrinkage reduction is achievable.</div>
+        <div class="uc-solution">Behaviour Anomaly Detection + Alert Engine</div>
+        <div class="uc-kpi" style="color:var(--accent)"><span class="kpi-dot"></span>Shrinkage % · Incidents detected per day</div>
+      </div>
+
+      <div class="uc-card amber">
+        <div class="uc-emoji">📊</div>
+        <div class="uc-title">Footfall & Zone Heatmaps</div>
+        <div class="uc-desc">Counts customers at entry/exit and maps movement across every aisle and zone. Dwell time analytics reveal which displays convert and which are underperforming.</div>
+        <div class="uc-solution">People Counter + Zone Analytics Engine</div>
+        <div class="uc-kpi" style="color:#d97706"><span class="kpi-dot"></span>Visitors per hour · Dwell time per zone</div>
+      </div>
+
+      <div class="uc-card yellow">
+        <div class="uc-emoji">💳</div>
+        <div class="uc-title">Queue & Checkout Intelligence</div>
+        <div class="uc-desc">Monitors POS queue lengths in real time, alerting supervisors to open additional tills before abandonment occurs. Tracks abandoned basket events to quantify missed revenue.</div>
+        <div class="uc-solution">Queue Estimation Model + POS Alert Integration</div>
+        <div class="uc-kpi" style="color:var(--accent3)"><span class="kpi-dot"></span>Queue wait time · Abandoned basket rate</div>
+      </div>
+
+      <div class="uc-card red">
+        <div class="uc-emoji">🏪</div>
+        <div class="uc-title">Shelf Intelligence & OOS Detection</div>
+        <div class="uc-desc">Computer vision monitors shelves continuously, detecting out-of-stock conditions, misplaced items, and planogram non-compliance — triggering staff replenishment alerts automatically.</div>
+        <div class="uc-solution">Shelf Monitoring CNN + Planogram Compliance AI</div>
+        <div class="uc-kpi" style="color:var(--accent4)"><span class="kpi-dot"></span>Stockout rate · Replenishment response time</div>
+      </div>
+
+      <div class="uc-card purple">
+        <div class="uc-emoji">🧍</div>
+        <div class="uc-title">Customer Path & Behaviour Tracking</div>
+        <div class="uc-desc">Anonymised customer journey mapping reveals traffic flow patterns, high-engagement zones, and missed conversion opportunities across the entire store floor.</div>
+        <div class="uc-solution">Multi-Camera Path Tracking + Engagement Scoring</div>
+        <div class="uc-kpi" style="color:#7c3aed"><span class="kpi-dot"></span>Conversion % · Journey touchpoint data</div>
+      </div>
+
+      <div class="uc-card teal">
+        <div class="uc-emoji">📦</div>
+        <div class="uc-title">Back-of-Store Inventory & Dock AI</div>
+        <div class="uc-desc">Monitors receiving docks and stock rooms to verify incoming shipments, track carton counts, and flag discrepancies against PO quantities — reducing inventory inaccuracies significantly.</div>
+        <div class="uc-solution">Object Counting + RFID-Vision Fusion</div>
+        <div class="uc-kpi" style="color:#0891b2"><span class="kpi-dot"></span>Inventory accuracy % · Dock throughput</div>
+      </div>
+
+      <div class="uc-card orange">
+        <div class="uc-emoji">👷</div>
+        <div class="uc-title">Staff Presence & Productivity AI</div>
+        <div class="uc-desc">Verifies staff are present and active at assigned zones during peak hours. Detects understaffed aisles and generates automated floor coverage alerts for shift supervisors.</div>
+        <div class="uc-solution">Presence Detection + Zone Adherence Engine</div>
+        <div class="uc-kpi" style="color:#ea580c"><span class="kpi-dot"></span>Staff coverage % · Underserved zone alerts</div>
+      </div>
+
+      <div class="uc-card indigo">
+        <div class="uc-emoji">🔥</div>
+        <div class="uc-title">Emergency & Crowd Control</div>
+        <div class="uc-desc">Real-time crowd density monitoring triggers evacuation guidance and manager alerts during peak-hour bottlenecks, fire events, or emergency situations — across all store zones.</div>
+        <div class="uc-solution">Crowd Density AI + Emergency Response Routing</div>
+        <div class="uc-kpi" style="color:#4f46e5"><span class="kpi-dot"></span>Response time · Zone occupancy levels</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ IAAS FLOWCHART ══════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">IaaS — Intelligence as a Service</p>
+    <h2 class="section-title">The AI Stack That Powers IaaS</h2>
+    <p class="section-desc">In-store cameras, sensors, and POS signals feed a multimodal AI stack that converts raw retail data into actionable intelligence for every stakeholder — from store manager to HQ.</p>
+
+    <div class="iaas-wrap">
+
+      <div class="iaas-title-bar">
+        <h3>Intelligence as a Service (IaaS) — AI Stack</h3>
+        <span class="iaas-badge">MULTIMODAL LLM CORE</span>
+      </div>
+
+      <div class="iaas-stack">
+
+        <!-- Layer 1: Raw Inputs -->
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 1</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell">
+              <span class="cell-icon">📷</span>
+              <span class="cell-label">Visual Input</span>
+              <span class="cell-sub">Fixed + Overhead Cameras</span>
+            </div>
+            <div class="iaas-cell">
+              <span class="cell-icon">🎙️</span>
+              <span class="cell-label">Audio Input</span>
+              <span class="cell-sub">Store Floor Microphones</span>
+            </div>
+            <div class="iaas-cell">
+              <span class="cell-icon">📡</span>
+              <span class="cell-label">Sensor Input</span>
+              <span class="cell-sub">IoT: Door, Weight, Motion</span>
+            </div>
+            <div class="iaas-cell">
+              <span class="cell-icon">🖥️</span>
+              <span class="cell-label">POS / ERP Data</span>
+              <span class="cell-sub">Transaction & inventory signals</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow down -->
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.2">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+        </div>
+
+        <!-- Layer 2: Edge AI Processing -->
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 2</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell highlight">
+              <span class="cell-icon">⚡</span>
+              <span class="cell-label">Customer Behaviour Analytics</span>
+              <span class="cell-sub">Dwell time, path tracking, engagement scoring</span>
+            </div>
+            <div class="iaas-cell highlight">
+              <span class="cell-icon">🧠</span>
+              <span class="cell-label">Product Interaction Detection</span>
+              <span class="cell-sub">Shelf pick-and-replace, basket analysis</span>
+            </div>
+            <div class="iaas-cell highlight">
+              <span class="cell-icon">🔗</span>
+              <span class="cell-label">Queue & Checkout Intelligence</span>
+              <span class="cell-sub">POS queue estimation, abandoned cart detection</span>
+            </div>
+            <div class="iaas-cell highlight">
+              <span class="cell-icon">🎯</span>
+              <span class="cell-label">Loss Prevention AI</span>
+              <span class="cell-sub">Concealment detection, unusual behaviour flagging</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow down -->
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.2">↓</div>
+          <div class="iaas-down-arrow" style="flex:4; text-align:center;">↓ Edge-processed events fed to Cloud</div>
+        </div>
+
+        <!-- Layer 3: Multimodal LLM -->
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 3</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell green-hl" style="flex:2">
+              <span class="cell-icon">🤖</span>
+              <span class="cell-label">Multimodal LLM Core (GPT-4 Vision / Custom)</span>
+              <span class="cell-sub">Fuses visual events, POS signals, and inventory data → generates store-specific retail intelligence and conversion insights</span>
+            </div>
+            <div class="iaas-cell">
+              <span class="cell-icon">🗄️</span>
+              <span class="cell-label">Retail Context DB</span>
+              <span class="cell-sub">Product catalogue · Planogram · Historical sales</span>
+            </div>
+            <div class="iaas-cell">
+              <span class="cell-icon">📐</span>
+              <span class="cell-label">Rules & Policy Engine</span>
+              <span class="cell-sub">Alert thresholds · Loss prevention rules · Zone policies</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow down -->
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.2">↓</div>
+          <div class="iaas-down-arrow" style="flex:4; text-align:center;">↓ Intelligence delivered as personalised outputs</div>
+        </div>
+
+        <!-- Layer 4: Outputs -->
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 4</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell yellow-hl">
+              <span class="cell-icon">📊</span>
+              <span class="cell-label">Store Operations Dashboard</span>
+              <span class="cell-sub">Store Manager · Floor Supervisor · HQ</span>
+            </div>
+            <div class="iaas-cell yellow-hl">
+              <span class="cell-icon">🔔</span>
+              <span class="cell-label">Real-time Alerts</span>
+              <span class="cell-sub">Loss events · Queue overflow · Stockouts</span>
+            </div>
+            <div class="iaas-cell yellow-hl">
+              <span class="cell-icon">📱</span>
+              <span class="cell-label">Manager Notifications</span>
+              <span class="cell-sub">Zone occupancy · Staff coverage · Incident clips</span>
+            </div>
+            <div class="iaas-cell yellow-hl">
+              <span class="cell-icon">📝</span>
+              <span class="cell-label">Retail Performance Reports</span>
+              <span class="cell-sub">Conversion analytics · Shrinkage trends · Daily</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.iaas-stack -->
+
+      <!-- Legend -->
+      <div style="margin-top:28px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); display:flex; gap:24px; font-size:11px; color:#6b7280;">
+        <span>🔵 Edge AI Layer &nbsp;|</span>
+        <span>🟢 LLM Intelligence Layer &nbsp;|</span>
+        <span>🟡 Output & Delivery Layer</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPECTED BENEFITS ══════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Indicative Outcomes</p>
+    <h2 class="section-title">Expected Benefits from Early Pilots</h2>
+    <p class="section-desc">Quantitative outcomes based on benchmark industry data and prototype-phase deployments in simulated and live retail environments.</p>
+
+    <div class="benefits-grid">
+
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#d97706;">~60%</div>
+        <div class="benefit-label">Reduction in Retail Shrinkage</div>
+        <div class="benefit-desc">AI-powered loss prevention detects concealment and suspicious behaviour in real time, reducing shrinkage significantly versus CCTV-only setups.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:60%; background:#d97706;"></div></div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:var(--accent);">~97%</div>
+        <div class="benefit-label">Footfall Counting Accuracy</div>
+        <div class="benefit-desc">Overhead people-counting cameras deliver near-perfect entry/exit data, replacing manual clicker counts and unreliable beam sensors.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:97%; background:var(--accent);"></div></div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:var(--accent4);">~35%</div>
+        <div class="benefit-label">Reduction in Queue Abandonment</div>
+        <div class="benefit-desc">Proactive queue alerts enable supervisors to open tills before customers leave, recovering revenue that would otherwise be lost to frustration.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:35%; background:var(--accent4);"></div></div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#7c3aed;">⚡ Real-time</div>
+        <div class="benefit-label">Shelf Restock & Planogram Alerts</div>
+        <div class="benefit-desc">Out-of-stock and planogram deviation alerts reach floor staff instantly, eliminating the manual shelf-walk and ensuring shelf availability during peak hours.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:85%; background:#7c3aed;"></div></div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#0891b2;">~25%</div>
+        <div class="benefit-label">Uplift in Zone Conversion Rate</div>
+        <div class="benefit-desc">Heatmap and dwell-time intelligence guides merchandising decisions — moving high-margin products to high-engagement zones increases basket size measurably.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:25%; background:#0891b2;"></div></div>
+      </div>
+
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#ea580c;">100%</div>
+        <div class="benefit-label">Incident Audit Trail</div>
+        <div class="benefit-desc">Every loss event is automatically clipped, timestamped, and tagged. Post-incident investigation time drops from hours to minutes with searchable video evidence.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%; background:#ea580c;"></div></div>
+      </div>
+
+    </div>
+
+    <p style="font-size:11px; color:var(--muted); margin-top:24px; font-family:'IBM Plex Mono',monospace;">
+      * Indicative outcomes based on benchmark industry data and prototype-phase deployments. Actual results vary by site.
+    </p>
+  </div>
+</section>
+
+<!-- ══ URGENCY & ROADMAP ══════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Market Context & Roadmap</p>
+    <h2 class="section-title">Why Now? Urgency & Outlook</h2>
+    <p class="section-desc">India's retail sector is at an inflection point — Tier-2 city expansion, rising shrinkage, and unmonitored CCTV footage create an urgent case for Vision AI adoption.</p>
+
+    <div class="urgency-band">
+      <div class="urgency-icon">⚠️</div>
+      <div class="urgency-body">
+        <h4>India's Retail Surge Is Outpacing Manual Security & Operations</h4>
+        <p>India has 750+ organised malls and thousands of standalone retail chains, with rapid expansion into Tier-2 and Tier-3 cities. Retail shrinkage remains at 1.5–2% of revenue — largely because 80%+ of CCTV footage is never reviewed. Queue abandonment drives 15–25% peak-hour revenue leakage. Retailers that deploy Vision AI infrastructure now gain a decisive competitive edge: lower shrinkage, higher conversion, and operational intelligence that manual teams simply cannot deliver.</p>
+
+        <div class="phase-row">
+          <div class="phase-item">
+            <strong>Phase 1 — Store Pilot</strong>
+            1–2 stores. Core: footfall counting + loss prevention AI. Duration: 2–3 months.
+          </div>
+          <div class="phase-item">
+            <strong>Phase 2 — Chain Rollout</strong>
+            All locations. Add: queue intelligence + shelf analytics + customer path tracking. Duration: 3–9 months.
+          </div>
+          <div class="phase-item">
+            <strong>Phase 3 — Retail Network Intelligence</strong>
+            Cross-store benchmarking, HQ analytics dashboard, predictive replenishment signals. Ongoing.
+          </div>
+        </div>
+
+        <!-- CTA Block -->
+        <div style="margin-top:40px; background:var(--ink); border-radius:16px; padding:40px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+          <div>
+            <p style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#fbbf24; margin-bottom:12px;">GET STARTED</p>
+            <h3 style="font-size:24px; font-weight:800; color:#ffffff; margin-bottom:8px;">Prototype is Free.<br>Book a Demo Now.</h3>
+            <p style="font-size:14px; color:#9ca3af; font-weight:300;">See Yantra AI running live on your store floor — loss prevention, queue alerts, and shelf intelligence in action.</p>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:12px; min-width:200px;">
+            <a href="#" style="background:#1a56db; color:#fff; padding:14px 28px; border-radius:8px; font-weight:700; font-size:14px; text-decoration:none; text-align:center;">Book a Demo →</a>
+            <a href="#" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); color:#e5e7eb; padding:12px 28px; border-radius:8px; font-weight:500; font-size:13px; text-decoration:none; text-align:center;">View All Sectors</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<div class="doc-footer">
+  <div>
+    <span>Yantra AI Solutions</span> — Vision AI for Indian Retail<br>
+    Confidential Case Study · One Godown Pvt Ltd
+  </div>
+  <div style="text-align:right;">
+    Indicative Data · Benchmark-based<br>
+    <span>IIT/NIT Founded · Prototype Stage</span>
+  </div>
+</div>
+
+</body>
+</html>

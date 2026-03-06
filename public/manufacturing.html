@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yantra AI — Vision AI for Manufacturing</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* === BASE === */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Sora', sans-serif; background: #f7f6f2; color: #0d1117; }
+
+  /* === HERO === */
+  .hero {
+    background: #0d1117; color: #fff;
+    padding: 56px 60px 48px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 380px; height: 380px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(234,88,12,0.22) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: #fb923c;
+    margin-bottom: 16px;
+  }
+  .hero h1 { font-size: 38px; font-weight: 800; margin-bottom: 12px; line-height: 1.15; }
+  .hero h1 span { color: #fb923c; }
+  .hero p { color: #9ca3af; font-size: 15px; font-weight: 300; max-width: 580px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    color: #e5e7eb; padding: 5px 13px; border-radius: 40px; font-size: 12px; font-weight: 500;
+  }
+
+  /* === SPLIT LAYOUT === */
+  .split { display: flex; min-height: 82vh; }
+
+  /* LEFT — Use case text panel */
+  .split-left {
+    width: 46%; padding: 44px 48px;
+    overflow-y: auto; background: #fff;
+    border-right: 1px solid #e5e7eb;
+  }
+  .split-left-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: #ea580c;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #ea580c;
+  }
+
+  /* Use case entry — appears as slideshow progresses */
+  .uc-entry {
+    padding: 20px 0;
+    border-bottom: 1px solid #f0f0f0;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .uc-entry.visible { opacity: 1; transform: translateY(0); }
+  .uc-entry .uc-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: #9ca3af; margin-bottom: 6px;
+  }
+  .uc-entry .uc-heading {
+    font-size: 15px; font-weight: 700; color: #0d1117; margin-bottom: 6px;
+  }
+  .uc-entry .uc-heading .uc-tag {
+    display: inline-block;
+    background: #fff4ed; color: #c2410c;
+    font-size: 10px; font-weight: 600;
+    padding: 2px 8px; border-radius: 4px;
+    margin-right: 8px; vertical-align: middle;
+    border: 1px solid #fed7aa;
+  }
+  .uc-entry .uc-detail { font-size: 13px; color: #6b7280; line-height: 1.65; }
+
+  /* RIGHT — Slideshow panel */
+  .split-right {
+    width: 54%; position: relative;
+    background: #0d1117; overflow: hidden;
+  }
+
+  /* One video, overlays cycle on top */
+  .bg-video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; opacity: 0.75;
+  }
+
+  .slide-overlay {
+    position: absolute; inset: 0;
+    opacity: 0; transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+  .slide-overlay.active { opacity: 1; }
+
+  /* Gradient label at bottom */
+  .slide-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    padding: 48px 28px 28px;
+  }
+  .slide-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: #fb923c; letter-spacing: 2px; margin-bottom: 6px;
+  }
+  .slide-title { font-size: 20px; font-weight: 700; color: #fff; }
+  .slide-short {
+    font-size: 12px; color: #d1d5db;
+    font-family: 'IBM Plex Mono', monospace; margin-top: 5px;
+  }
+
+  /* Accent bar for current slide */
+  .slide-overlay.active .slide-label::before {
+    content: ''; display: block;
+    width: 40px; height: 3px;
+    background: #ea580c; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+
+  /* Slideshow controls */
+  .slide-controls {
+    position: absolute; bottom: 24px; right: 24px;
+    display: flex; gap: 8px; z-index: 10;
+  }
+  .slide-btn {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: #fff; padding: 8px 16px; border-radius: 6px;
+    cursor: pointer; font-size: 13px; font-weight: 500;
+    font-family: 'Sora', sans-serif;
+    transition: background 0.2s;
+  }
+  .slide-btn:hover { background: rgba(255,255,255,0.24); }
+
+  /* Progress dots */
+  .slide-dots {
+    position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 6px; z-index: 10;
+  }
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.3); transition: background 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+  .dot.active { background: #fb923c; transform: scale(1.4); }
+
+  /* === CASE STUDY BAR === */
+  .case-study-bar {
+    background: #0d1117; padding: 28px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .case-study-bar p { color: #9ca3af; font-size: 14px; }
+  .cs-label { font-size: 16px; color: #e5e7eb; font-weight: 600; margin-bottom: 4px; }
+  .cs-btn {
+    background: #ea580c; color: #fff;
+    padding: 13px 28px; border-radius: 8px;
+    font-weight: 700; font-size: 14px; cursor: pointer; border: none;
+    font-family: 'Sora', sans-serif;
+    transition: background 0.2s; white-space: nowrap;
+  }
+  .cs-btn:hover { background: #c2410c; }
+
+  /* === POPUP OVERLAY === */
+  .popup-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.78); z-index: 1000;
+    align-items: center; justify-content: center; padding: 32px;
+  }
+  .popup-overlay.open { display: flex; }
+  .popup-box {
+    background: #fff; border-radius: 16px;
+    width: 100%; max-width: 900px; max-height: 88vh;
+    overflow: hidden; position: relative;
+    display: flex; flex-direction: column;
+  }
+  .popup-close {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 20px; background: #fff;
+    border-bottom: 1px solid #e5e7eb; flex-shrink: 0;
+  }
+  .popup-close span { font-weight: 600; font-size: 14px; color: #0d1117; }
+  .popup-close button {
+    background: #f3f4f6; border: none;
+    padding: 7px 16px; border-radius: 6px;
+    cursor: pointer; font-weight: 600; font-size: 13px; color: #374151;
+    font-family: 'Sora', sans-serif;
+  }
+  .popup-close button:hover { background: #e5e7eb; }
+  .popup-iframe-wrap { flex: 1; overflow: hidden; }
+  .popup-iframe-wrap iframe {
+    width: 100%; height: 100%; border: none; display: block;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Vision AI · Manufacturing · Yantra AI Solutions</p>
+  <h1>Smarter Factories.<br><span>Vision AI</span> for Manufacturing.</h1>
+  <p>AI-powered safety compliance, quality inspection, and hazard detection — all on one edge platform for Indian factories and warehouses.</p>
+  <div class="hero-badges">
+    <span class="badge">🦺 PPE Compliance AI</span>
+    <span class="badge">🏭 Forklift Safety</span>
+    <span class="badge">🔍 Quality Inspection</span>
+    <span class="badge">🚫 Restricted Zone Alerts</span>
+    <span class="badge">📦 Dock & Inventory AI</span>
+  </div>
+</div>
+
+<!-- SPLIT: LEFT text + RIGHT slideshow -->
+<div class="split">
+
+  <!-- LEFT: Use case text builds up -->
+  <div class="split-left" id="ucPanel">
+    <p class="split-left-title">Use Cases · Manufacturing &amp; Factories</p>
+  </div>
+
+  <!-- RIGHT: Video with overlay labels cycling -->
+  <div class="split-right" id="slideshow">
+
+    <!-- Single looping video -->
+    <video class="bg-video" autoplay muted loop playsinline>
+      <source src="/videos/Manufacturing_VAI.mp4" type="video/mp4">
+    </video>
+
+    <!-- Overlay 0 -->
+    <div class="slide-overlay active" id="overlay-0">
+      <div class="slide-label">
+        <div class="slide-num">USE CASE 01 / 05</div>
+        <div class="slide-title">PPE Compliance Detection</div>
+        <div class="slide-short">Helmet · Vest · Gloves · Safety Shoes · Real-time Alert</div>
+      </div>
+    </div>
+
+    <!-- Overlay 1 -->
+    <div class="slide-overlay" id="overlay-1">
+      <div class="slide-label">
+        <div class="slide-num">USE CASE 02 / 05</div>
+        <div class="slide-title">Forklift &amp; Vehicle Safety</div>
+        <div class="slide-short">Near-Miss Detection · Speed Zone Violations · ISO 45001 Log</div>
+      </div>
+    </div>
+
+    <!-- Overlay 2 -->
+    <div class="slide-overlay" id="overlay-2">
+      <div class="slide-label">
+        <div class="slide-num">USE CASE 03 / 05</div>
+        <div class="slide-title">Visual Quality Inspection</div>
+        <div class="slide-short">Surface Defects · Dimension Mismatch · Label Error Detection</div>
+      </div>
+    </div>
+
+    <!-- Overlay 3 -->
+    <div class="slide-overlay" id="overlay-3">
+      <div class="slide-label">
+        <div class="slide-num">USE CASE 04 / 05</div>
+        <div class="slide-title">Restricted Zone Monitoring</div>
+        <div class="slide-short">Geo-fence Alert · Hazmat Zone · Factories Act Compliance</div>
+      </div>
+    </div>
+
+    <!-- Overlay 4 -->
+    <div class="slide-overlay" id="overlay-4">
+      <div class="slide-label">
+        <div class="slide-num">USE CASE 05 / 05</div>
+        <div class="slide-title">Inventory &amp; Dock Tracking</div>
+        <div class="slide-short">Carton Counting · ERP Reconciliation · Dock Throughput</div>
+      </div>
+    </div>
+
+    <!-- Dots -->
+    <div class="slide-dots" id="dots"></div>
+
+    <!-- Controls -->
+    <div class="slide-controls">
+      <button class="slide-btn" onclick="changeSlide(-1)">← Prev</button>
+      <button class="slide-btn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Case Study CTA Bar -->
+<div class="case-study-bar">
+  <div>
+    <p class="cs-label">See the full Manufacturing Case Study</p>
+    <p>Detailed use cases, IaaS stack, expected benefits and ROI snapshot.</p>
+  </div>
+  <button class="cs-btn" onclick="openPopup()">View Case Study →</button>
+</div>
+
+<!-- Popup with case study iframe -->
+<div class="popup-overlay" id="caseStudyPopup">
+  <div class="popup-box">
+    <div class="popup-close">
+      <span>Factories &amp; Warehouses — Yantra AI Case Study</span>
+      <button onclick="closePopup()">✕ Close</button>
+    </div>
+    <div class="popup-iframe-wrap" style="height: calc(88vh - 56px);">
+      <iframe src="/case-studies/Factories_YantraAI_CaseStudy.html" title="Manufacturing Case Study"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  const useCases = [
+    {
+      heading: "PPE Compliance Detection",
+      tag: "Safety AI",
+      detail: "Multi-class object detection identifies helmets, vests, gloves, goggles and safety shoes per person per zone. Real-time non-compliance alerts reach supervisors before incidents occur. Indicative benchmark: ~95% PPE compliance rate vs. ~60% industry average."
+    },
+    {
+      heading: "Forklift & Vehicle Safety",
+      tag: "Hazard Prevention",
+      detail: "Moving object tracking with zone-based speed limits detects near-miss events between forklifts and pedestrians in real time. Speed violations and proximity alerts are logged automatically for ISO 45001 compliance audits."
+    },
+    {
+      heading: "Visual Quality Inspection",
+      tag: "Defect Detection",
+      detail: "Industrial-grade CNN detects surface defects, dimension mismatches and label errors directly on the production line without stopping throughput. Defect escape rate drops by ~80% versus manual sampling (indicative benchmark)."
+    },
+    {
+      heading: "Restricted Zone Monitoring",
+      tag: "Access Control",
+      detail: "Person detection with geo-fence logic triggers instant alerts when workers enter hazardous areas — hazmat zones, live machinery, or unauthorised sections. Every breach is timestamped and archived for Factories Act compliance."
+    },
+    {
+      heading: "Inventory & Dock Tracking",
+      tag: "Logistics AI",
+      detail: "Vision AI counts cartons and pallets at receiving docks, verifying quantities against ERP purchase orders. Discrepancies are flagged before stock reaches the warehouse, reducing inventory inaccuracy by ~30% (indicative benchmark)."
+    }
+  ];
+
+  const totalSlides = useCases.length;
+  let current = 0;
+  let autoTimer = null;
+
+  function buildDots() {
+    const dotsEl = document.getElementById('dots');
+    useCases.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => { clearTimeout(autoTimer); goToSlide(i); scheduleAuto(); };
+      dotsEl.appendChild(d);
+    });
+  }
+
+  function goToSlide(n) {
+    document.querySelectorAll('.slide-overlay').forEach(o => o.classList.remove('active'));
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === n));
+    const target = document.getElementById('overlay-' + n);
+    if (target) target.classList.add('active');
+    revealUseCase(n);
+    current = n;
+  }
+
+  function changeSlide(dir) {
+    clearTimeout(autoTimer);
+    let next = current + dir;
+    if (next < 0) next = totalSlides - 1;
+    if (next >= totalSlides) next = 0;
+    goToSlide(next);
+    scheduleAuto();
+  }
+
+  function scheduleAuto() {
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(() => {
+      if (current < totalSlides - 1) { changeSlide(1); }
+    }, 5000);
+  }
+
+  const revealed = new Set();
+  function revealUseCase(index) {
+    if (revealed.has(index)) return;
+    revealed.add(index);
+    const panel = document.getElementById('ucPanel');
+    const uc = useCases[index];
+    const entry = document.createElement('div');
+    entry.className = 'uc-entry';
+    entry.innerHTML = `
+      <div class="uc-number">USE CASE ${String(index + 1).padStart(2, '0')}</div>
+      <div class="uc-heading">
+        <span class="uc-tag">${uc.tag}</span>${uc.heading}
+      </div>
+      <div class="uc-detail">${uc.detail}</div>
+    `;
+    panel.appendChild(entry);
+    setTimeout(() => entry.classList.add('visible'), 50);
+  }
+
+  function openPopup() {
+    document.getElementById('caseStudyPopup').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePopup() {
+    document.getElementById('caseStudyPopup').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('caseStudyPopup').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
+
+  buildDots();
+  goToSlide(0);
+  scheduleAuto();
+</script>
+
+</body>
+</html>

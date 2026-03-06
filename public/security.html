@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yantra AI — Vision AI for Security</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Sora', sans-serif; background: #f7f6f2; color: #0d1117; }
+
+  .hero {
+    background: #0d1117; color: #fff;
+    padding: 56px 60px 48px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 380px; height: 380px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(224,36,36,0.22) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: #f87171;
+    margin-bottom: 16px;
+  }
+  .hero h1 { font-size: 38px; font-weight: 800; margin-bottom: 12px; line-height: 1.15; }
+  .hero h1 span { color: #f87171; }
+  .hero p { color: #9ca3af; font-size: 15px; font-weight: 300; max-width: 580px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .badge {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    color: #e5e7eb; padding: 5px 13px; border-radius: 40px; font-size: 12px; font-weight: 500;
+  }
+
+  .split { display: flex; min-height: 82vh; }
+
+  .split-left {
+    width: 46%; padding: 44px 48px;
+    overflow-y: auto; background: #fff;
+    border-right: 1px solid #e5e7eb;
+  }
+  .split-left-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: #e02424;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #e02424;
+  }
+
+  .uc-entry {
+    padding: 20px 0; border-bottom: 1px solid #f0f0f0;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .uc-entry.visible { opacity: 1; transform: translateY(0); }
+  .uc-entry .uc-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: #9ca3af; margin-bottom: 6px;
+  }
+  .uc-entry .uc-heading {
+    font-size: 15px; font-weight: 700; color: #0d1117; margin-bottom: 6px;
+  }
+  .uc-entry .uc-heading .uc-tag {
+    display: inline-block;
+    background: #fef2f2; color: #991b1b;
+    font-size: 10px; font-weight: 600;
+    padding: 2px 8px; border-radius: 4px;
+    margin-right: 8px; vertical-align: middle;
+    border: 1px solid #fecaca;
+  }
+  .uc-entry .uc-detail { font-size: 13px; color: #6b7280; line-height: 1.65; }
+
+  .split-right {
+    width: 54%; position: relative;
+    background: #0d1117; overflow: hidden;
+  }
+
+  .bg-video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; opacity: 0.72;
+  }
+
+  .slide-overlay {
+    position: absolute; inset: 0;
+    opacity: 0; transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+  .slide-overlay.active { opacity: 1; }
+
+  .slide-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.92));
+    padding: 48px 28px 28px;
+  }
+  .slide-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: #f87171; letter-spacing: 2px; margin-bottom: 6px;
+  }
+  .slide-title { font-size: 20px; font-weight: 700; color: #fff; }
+  .slide-short {
+    font-size: 12px; color: #d1d5db;
+    font-family: 'IBM Plex Mono', monospace; margin-top: 5px;
+  }
+  .slide-overlay.active .slide-label::before {
+    content: ''; display: block;
+    width: 40px; height: 3px;
+    background: #e02424; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+
+  .slide-controls {
+    position: absolute; bottom: 24px; right: 24px;
+    display: flex; gap: 8px; z-index: 10;
+  }
+  .slide-btn {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: #fff; padding: 8px 16px; border-radius: 6px;
+    cursor: pointer; font-size: 13px; font-weight: 500;
+    font-family: 'Sora', sans-serif; transition: background 0.2s;
+  }
+  .slide-btn:hover { background: rgba(255,255,255,0.24); }
+
+  .slide-dots {
+    position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 6px; z-index: 10;
+  }
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.3); transition: background 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+  .dot.active { background: #f87171; transform: scale(1.4); }
+
+  .case-study-bar {
+    background: #0d1117; padding: 28px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .case-study-bar p { color: #9ca3af; font-size: 14px; }
+  .cs-label { font-size: 16px; color: #e5e7eb; font-weight: 600; margin-bottom: 4px; }
+  .cs-btn {
+    background: #e02424; color: #fff;
+    padding: 13px 28px; border-radius: 8px;
+    font-weight: 700; font-size: 14px; cursor: pointer; border: none;
+    font-family: 'Sora', sans-serif; transition: background 0.2s; white-space: nowrap;
+  }
+  .cs-btn:hover { background: #b91c1c; }
+
+  .popup-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.78); z-index: 1000;
+    align-items: center; justify-content: center; padding: 32px;
+  }
+  .popup-overlay.open { display: flex; }
+  .popup-box {
+    background: #fff; border-radius: 16px;
+    width: 100%; max-width: 900px; max-height: 88vh;
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .popup-close {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 20px; background: #fff;
+    border-bottom: 1px solid #e5e7eb; flex-shrink: 0;
+  }
+  .popup-close span { font-weight: 600; font-size: 14px; color: #0d1117; }
+  .popup-close button {
+    background: #f3f4f6; border: none;
+    padding: 7px 16px; border-radius: 6px;
+    cursor: pointer; font-weight: 600; font-size: 13px; color: #374151;
+    font-family: 'Sora', sans-serif;
+  }
+  .popup-close button:hover { background: #e5e7eb; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Vision AI · Security · Yantra AI Solutions</p>
+  <h1>Smarter Surveillance.<br><span>AI-Powered Security</span> Intelligence.</h1>
+  <p>Perimeter breach detection, intrusion alerts and guard patrol verification — turning passive CCTV into a proactive 24/7 security command centre.</p>
+  <div class="hero-badges">
+    <span class="badge">🔒 Perimeter Intelligence</span>
+    <span class="badge">🚨 Intrusion &amp; Loitering Alerts</span>
+    <span class="badge">🚪 Tailgating Prevention</span>
+    <span class="badge">📦 Abandoned Object Detection</span>
+    <span class="badge">🗺️ Guard Patrol Verification</span>
+  </div>
+</div>
+
+<!-- SPLIT -->
+<div class="split">
+
+  <div class="split-left" id="ucPanel">
+    <p class="split-left-title">Use Cases · Security Agencies &amp; Command Centres</p>
+  </div>
+
+  <div class="split-right" id="slideshow">
+
+    <video class="bg-video" autoplay muted loop playsinline>
+      <source src="/videos/Security_VAI.mp4" type="video/mp4">
+    </video>
+
+    <div class="slide-overlay active" id="overlay-0">
+      <div class="slide-label">
+        <div class="slide-num">USE CASE 01 / 05</div>
+        <div class="slide-title">Perimeter Breach Detection</div>
+        <div class="slide-short">Fence-line AI · 24/7 Monitoring · 95%+ Detection Rate</div>
+      </div>
+    </div>
+
+    <div class="slide-overlay" id="overlay-1">
+      <div class="slide-label">
+        <div class="slide-num">USE CASE 02 / 05</div>
+        <div class="slide-title">Intrusion &amp; Loitering Alerts</div>
+        <div class="slide-short">Dwell-time AI · ~90% False Alarm Reduction · Real-time Alert</div>
+      </div>
+    </div>
+
+    <div class="slide-overlay" id="overlay-2">
+      <div class="slide-label">
+        <div class="slide-num">USE CASE 03 / 05</div>
+        <div class="slide-title">Tailgating Prevention</div>
+        <div class="slide-short">Multi-Person Entry Counter · Access Audit · SLA Reporting</div>
+      </div>
+    </div>
+
+    <div class="slide-overlay" id="overlay-3">
+      <div class="slide-label">
+        <div class="slide-num">USE CASE 04 / 05</div>
+        <div class="slide-title">Abandoned Object Detection</div>
+        <div class="slide-short">Static Object Classification · Threshold Alert · Rapid Response</div>
+      </div>
+    </div>
+
+    <div class="slide-overlay" id="overlay-4">
+      <div class="slide-label">
+        <div class="slide-num">USE CASE 05 / 05</div>
+        <div class="slide-title">Guard Patrol Verification</div>
+        <div class="slide-short">Checkpoint AI · Patrol Completion % · Client Audit Trail</div>
+      </div>
+    </div>
+
+    <div class="slide-dots" id="dots"></div>
+
+    <div class="slide-controls">
+      <button class="slide-btn" onclick="changeSlide(-1)">← Prev</button>
+      <button class="slide-btn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Case Study CTA Bar -->
+<div class="case-study-bar">
+  <div>
+    <p class="cs-label">See the full Security Case Study</p>
+    <p>Detailed use cases, IaaS stack, expected benefits and ROI snapshot.</p>
+  </div>
+  <button class="cs-btn" onclick="openPopup()">View Case Study →</button>
+</div>
+
+<!-- Popup -->
+<div class="popup-overlay" id="caseStudyPopup">
+  <div class="popup-box">
+    <div class="popup-close">
+      <span>Security Agencies — Yantra AI Case Study</span>
+      <button onclick="closePopup()">✕ Close</button>
+    </div>
+    <div style="flex:1; overflow:hidden; height: calc(88vh - 56px);">
+      <iframe src="/case-studies/Security_YantraAI_CaseStudy.html" style="width:100%;height:100%;border:none;display:block;" title="Security Case Study"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  const useCases = [
+    {
+      heading: "Perimeter Breach Detection",
+      tag: "Perimeter AI",
+      detail: "AI monitors fence lines, walls and entry points 24/7 — detecting climbing, crawling and vehicle approach patterns that traditional motion sensors miss entirely. Indicative benchmark: 95%+ breach detection rate vs. ~40% for manual CCTV monitoring."
+    },
+    {
+      heading: "Intrusion & Loitering Alerts",
+      tag: "Threat Detection",
+      detail: "Person detection with configurable dwell-time thresholds flags loitering and intrusion in real time. False alarm rate drops ~90% versus traditional motion sensors, reducing operator fatigue and ensuring genuine threats receive immediate attention."
+    },
+    {
+      heading: "Tailgating Prevention",
+      tag: "Access Control",
+      detail: "Multi-person entry counter detects when more individuals enter on a single access event than authorised. Every tailgate incident is logged with timestamp and video clip evidence — creating an audit trail for client SLA reporting and PSARA compliance."
+    },
+    {
+      heading: "Abandoned Object Detection",
+      tag: "Asset Security",
+      detail: "Static object classification identifies bags, packages or equipment left unattended beyond a configurable time threshold. Alerts are triggered automatically, enabling rapid assessment and response before situations escalate."
+    },
+    {
+      heading: "Guard Patrol Verification",
+      tag: "Compliance AI",
+      detail: "Face and uniform recognition with checkpoint time-stamping automatically verifies guards completed assigned patrol routes on schedule. Patrol completion percentages and coverage audit trails are delivered to clients in real time — no manual reporting required."
+    }
+  ];
+
+  const totalSlides = useCases.length;
+  let current = 0;
+  let autoTimer = null;
+
+  function buildDots() {
+    const dotsEl = document.getElementById('dots');
+    useCases.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => { clearTimeout(autoTimer); goToSlide(i); scheduleAuto(); };
+      dotsEl.appendChild(d);
+    });
+  }
+
+  function goToSlide(n) {
+    document.querySelectorAll('.slide-overlay').forEach(o => o.classList.remove('active'));
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === n));
+    const target = document.getElementById('overlay-' + n);
+    if (target) target.classList.add('active');
+    revealUseCase(n);
+    current = n;
+  }
+
+  function changeSlide(dir) {
+    clearTimeout(autoTimer);
+    let next = current + dir;
+    if (next < 0) next = totalSlides - 1;
+    if (next >= totalSlides) next = 0;
+    goToSlide(next);
+    scheduleAuto();
+  }
+
+  function scheduleAuto() {
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(() => {
+      if (current < totalSlides - 1) { changeSlide(1); }
+    }, 5000);
+  }
+
+  const revealed = new Set();
+  function revealUseCase(index) {
+    if (revealed.has(index)) return;
+    revealed.add(index);
+    const panel = document.getElementById('ucPanel');
+    const uc = useCases[index];
+    const entry = document.createElement('div');
+    entry.className = 'uc-entry';
+    entry.innerHTML = `
+      <div class="uc-number">USE CASE ${String(index + 1).padStart(2, '0')}</div>
+      <div class="uc-heading">
+        <span class="uc-tag">${uc.tag}</span>${uc.heading}
+      </div>
+      <div class="uc-detail">${uc.detail}</div>
+    `;
+    panel.appendChild(entry);
+    setTimeout(() => entry.classList.add('visible'), 50);
+  }
+
+  function openPopup() {
+    document.getElementById('caseStudyPopup').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePopup() {
+    document.getElementById('caseStudyPopup').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('caseStudyPopup').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
+
+  buildDots();
+  goToSlide(0);
+  scheduleAuto();
+</script>
+
+</body>
+</html>

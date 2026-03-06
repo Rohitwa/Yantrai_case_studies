@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yantra AI Solutions — Vision AI for Factories & Warehouses</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d1117;
+    --bg: #f7f6f2;
+    --white: #ffffff;
+    --accent: #1a56db;
+    --accent2: #ea580c;
+    --accent3: #e3a008;
+    --accent4: #e02424;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --card: #ffffff;
+    --tag-bg: #eef2ff;
+    --tag-fg: #3730a3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.7; }
+
+  .hero { background: var(--ink); color: var(--white); padding: 64px 60px 56px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(234,88,12,0.22) 0%, transparent 70%); pointer-events: none; }
+  .hero-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #fb923c; margin-bottom: 18px; }
+  .hero h1 { font-size: 42px; font-weight: 800; line-height: 1.15; max-width: 700px; margin-bottom: 20px; }
+  .hero h1 span { color: #fb923c; }
+  .hero-sub { font-size: 16px; color: #9ca3af; max-width: 600px; font-weight: 300; margin-bottom: 36px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+  .badge { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #e5e7eb; padding: 6px 14px; border-radius: 40px; font-size: 12px; font-weight: 500; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .section-title { font-size: 26px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+  .section-desc { color: var(--muted); font-size: 14px; max-width: 620px; margin-bottom: 40px; font-weight: 400; }
+
+  .kpi-strip { background: var(--ink); padding: 0; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .kpi-item { padding: 36px 32px; border-right: 1px solid rgba(255,255,255,0.08); color: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-num { font-size: 44px; font-weight: 800; color: #fb923c; line-height: 1; margin-bottom: 6px; }
+  .kpi-label { font-size: 13px; color: #9ca3af; font-weight: 400; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .about-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+  .about-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .icon-blue { background: #dbeafe; }
+  .icon-green { background: #d1fae5; }
+  .icon-yellow { background: #fef3c7; }
+  .icon-orange { background: #ffedd5; }
+
+  .usecase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .uc-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px; position: relative; overflow: hidden; transition: box-shadow 0.2s; }
+  .uc-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .uc-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
+  .uc-card.blue::after { background: var(--accent); }
+  .uc-card.orange::after { background: #ea580c; }
+  .uc-card.yellow::after { background: var(--accent3); }
+  .uc-card.red::after { background: var(--accent4); }
+  .uc-card.teal::after { background: #0891b2; }
+  .uc-card.indigo::after { background: #4f46e5; }
+  .uc-emoji { font-size: 26px; margin-bottom: 12px; }
+  .uc-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .uc-desc { font-size: 12px; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+  .uc-solution { font-size: 11px; font-family: 'IBM Plex Mono', monospace; background: var(--bg); border-radius: 6px; padding: 6px 10px; color: var(--ink); margin-bottom: 14px; }
+  .uc-kpi { font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .kpi-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+  .iaas-wrap { background: #1e293b; border-radius: 16px; padding: 40px; color: var(--white); }
+  .iaas-title-bar { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+  .iaas-title-bar h3 { font-size: 18px; font-weight: 700; color: var(--white); }
+  .iaas-badge { background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.3); color: #93c5fd; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 1px; }
+  .iaas-stack { display: flex; flex-direction: column; gap: 4px; }
+  .iaas-row { display: flex; align-items: stretch; gap: 4px; }
+  .iaas-layer-label { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 9px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 2px; text-transform: uppercase; color: #6b7280; padding: 0 10px; display: flex; align-items: center; justify-content: center; min-width: 32px; }
+  .iaas-cells { display: flex; flex: 1; gap: 4px; }
+  .iaas-cell { flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 14px 16px; font-size: 12px; font-weight: 500; color: #e5e7eb; display: flex; flex-direction: column; gap: 4px; }
+  .iaas-cell.highlight { background: rgba(59,130,246,0.2); border-color: rgba(96,165,250,0.35); color: #bfdbfe; }
+  .iaas-cell.green-hl { background: rgba(16,185,129,0.18); border-color: rgba(52,211,153,0.3); color: #a7f3d0; }
+  .iaas-cell.yellow-hl { background: rgba(245,158,11,0.18); border-color: rgba(251,191,36,0.3); color: #fde68a; }
+  .iaas-cell .cell-icon { font-size: 16px; margin-bottom: 2px; }
+  .iaas-cell .cell-label { font-size: 11px; font-weight: 700; }
+  .iaas-cell .cell-sub { font-size: 10px; opacity: 0.7; font-family: 'IBM Plex Mono', monospace; }
+  .iaas-arrow-row { display: flex; justify-content: center; align-items: center; gap: 16px; padding: 4px 0; }
+  .iaas-down-arrow { color: #4b5563; font-size: 20px; flex: 1; text-align: center; }
+
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .benefit-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .benefit-num { font-size: 38px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+  .benefit-label { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .benefit-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .bar-track { margin-top: 14px; background: var(--border); border-radius: 4px; height: 6px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; }
+
+  .urgency-band { background: #fefce8; border: 1.5px solid #fde68a; border-radius: 12px; padding: 28px 32px; display: flex; gap: 20px; align-items: flex-start; }
+  .urgency-icon { font-size: 28px; flex-shrink: 0; }
+  .urgency-body h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .urgency-body p { font-size: 13px; color: #78350f; line-height: 1.6; }
+  .phase-row { display: flex; gap: 12px; margin-top: 18px; }
+  .phase-item { flex: 1; background: var(--white); border: 1px solid #fde68a; border-radius: 8px; padding: 14px; font-size: 12px; }
+  .phase-item strong { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+
+  .doc-footer { background: var(--ink); color: #6b7280; padding: 28px 40px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .doc-footer span { font-weight: 600; color: #9ca3af; }
+
+  @media (max-width: 900px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .usecase-grid { grid-template-columns: repeat(2, 1fr); }
+    .benefits-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 24px; }
+    .hero h1 { font-size: 28px; }
+    .container { padding: 0 20px; }
+    .phase-row { flex-direction: column; }
+  }
+  @media print {
+    body { background: white; }
+    .hero { -webkit-print-color-adjust: exact; }
+    .kpi-strip { -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Vision AI · Factories & Warehouses · Yantra AI Solutions</p>
+    <h1>Zero Accidents. Full Compliance.<br><span>Industrial AI</span> on Every Floor.</h1>
+    <p class="hero-sub">How Yantra AI Solutions delivers real-time PPE compliance, forklift safety monitoring, and ISO 45001-ready audit documentation across Indian factories and warehouses.</p>
+    <div class="hero-badges">
+      <span class="badge">🦺 PPE Compliance AI</span>
+      <span class="badge">🚜 Forklift Safety</span>
+      <span class="badge">🔍 Visual Quality Inspection</span>
+      <span class="badge">🚫 Restricted Zone Alerts</span>
+      <span class="badge">📦 Inventory Intelligence</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ KPI STRIP ══════════════════════════════════════════ -->
+<div class="kpi-strip">
+  <div class="kpi-grid">
+    <div class="kpi-item">
+      <div class="kpi-num">~70%</div>
+      <div class="kpi-label">Reduction in workplace accidents (indicative)</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">~95%</div>
+      <div class="kpi-label">PPE compliance rate on monitored floors</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">⚡ Live</div>
+      <div class="kpi-label">Hazard zone breach alerts to supervisors</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">Multi</div>
+      <div class="kpi-label">Multi-Use Cases across one platform</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT YANTRA ═══════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Company Overview</p>
+    <h2 class="section-title">Who is Yantra AI Solutions?</h2>
+    <p class="section-desc">An AI-first team from IIT/NIT backgrounds, building industrial Vision AI products that create documented, auditable safety records on existing camera infrastructure.</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3><span class="icon icon-blue">🎓</span> IIT/NIT Founders</h3>
+        <p style="font-size:13px;color:var(--muted);">Research-grade AI applied to industrial safety and quality. Founders bring deep expertise in computer vision and manufacturing operations.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-orange">🔒</span> ISO 45001 & Factories Act Aligned</h3>
+        <p style="font-size:13px;color:var(--muted);">Every detection event creates a timestamped, exportable compliance record — the audit trail regulators and insurers increasingly demand.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-yellow">🧩</span> Modular Safety Stack</h3>
+        <p style="font-size:13px;color:var(--muted);">Start with PPE compliance in your highest-risk zone. Add forklift monitoring, QC inspection, and smoke/fire detection as you scale.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-green">📡</span> Edge-First, No Cloud Dependency</h3>
+        <p style="font-size:13px;color:var(--muted);">On-premise edge AI processing ensures real-time detection in factory environments with low-latency alerts — no internet required for core safety functions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ USE CASES ══════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Platform Capabilities</p>
+    <h2 class="section-title">Multi-Use Cases. One Integrated Platform.</h2>
+    <p class="section-desc">From PPE compliance to inventory tracking — every safety and operations module runs on the same AI stack, sharing cameras and compute across your facility.</p>
+    <div class="usecase-grid">
+
+      <div class="uc-card blue">
+        <div class="uc-emoji">🦺</div>
+        <div class="uc-title">PPE Compliance Detection</div>
+        <div class="uc-desc">Multi-class AI detects helmets, vests, gloves, goggles, and safety shoes per worker per zone — alerting supervisors in real time and generating ISO 45001-ready compliance logs automatically.</div>
+        <div class="uc-solution">Multi-Class Object Detection + Zone Rules</div>
+        <div class="uc-kpi" style="color:#1a56db"><span class="kpi-dot"></span>~95% compliance rate · Automated audit trail</div>
+      </div>
+
+      <div class="uc-card orange">
+        <div class="uc-emoji">🚜</div>
+        <div class="uc-title">Forklift & Vehicle Safety</div>
+        <div class="uc-desc">Moving object detection with speed estimation monitors forklift lanes, flags speed violations, and detects near-miss events between vehicles and pedestrians before accidents occur.</div>
+        <div class="uc-solution">Moving Object Detection + Speed Zones</div>
+        <div class="uc-kpi" style="color:#ea580c"><span class="kpi-dot"></span>Near-miss flagged · Speed violations logged</div>
+      </div>
+
+      <div class="uc-card yellow">
+        <div class="uc-emoji">🔍</div>
+        <div class="uc-title">Visual Quality Inspection</div>
+        <div class="uc-desc">Defect detection CNN running inline on production lines identifies surface defects, dimension mismatches, and label errors — reducing defect escape rate and boosting throughput without additional QC headcount.</div>
+        <div class="uc-solution">Defect Detection CNN + Rejection Flag</div>
+        <div class="uc-kpi" style="color:#e3a008"><span class="kpi-dot"></span>~80% reduction in defect escape rate</div>
+      </div>
+
+      <div class="uc-card red">
+        <div class="uc-emoji">🚫</div>
+        <div class="uc-title">Restricted Zone Monitoring</div>
+        <div class="uc-desc">Virtual geo-fence alerts fire the instant an unauthorised person enters a hazmat area, live machinery zone, or secure storage area — with clip extraction for incident documentation.</div>
+        <div class="uc-solution">Person Detection + Geo-fence Alert</div>
+        <div class="uc-kpi" style="color:#e02424"><span class="kpi-dot"></span>Unauthorised entries flagged · &lt;5 sec response</div>
+      </div>
+
+      <div class="uc-card teal">
+        <div class="uc-emoji">📦</div>
+        <div class="uc-title">Inventory & Dock Tracking</div>
+        <div class="uc-desc">Object counting and RFID-vision fusion tracks goods at dock entry/exit, monitors shelf levels, and reconciles shipment counts — reducing inventory discrepancy that costs 2–5% of stock value annually.</div>
+        <div class="uc-solution">Object Counting + RFID-Vision Fusion</div>
+        <div class="uc-kpi" style="color:#0891b2"><span class="kpi-dot"></span>~30% improvement in inventory accuracy</div>
+      </div>
+
+      <div class="uc-card indigo">
+        <div class="uc-emoji">💨</div>
+        <div class="uc-title">Smoke, Fire & Spill Detection</div>
+        <div class="uc-desc">Early anomaly detection model trained on industrial smoke, fire, and chemical spill signatures — triggering emergency alerts minutes before manual detection, reducing escalation damage and regulatory liability.</div>
+        <div class="uc-solution">Anomaly Detection + Emergency Alert</div>
+        <div class="uc-kpi" style="color:#4f46e5"><span class="kpi-dot"></span>Early detection · Minutes ahead of manual alert</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ IAAS STACK ══════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">IaaS — Intelligence as a Service</p>
+    <h2 class="section-title">The AI Stack That Powers IaaS</h2>
+    <p class="section-desc">Factory cameras and sensors feed edge AI processors which detect safety events locally — a multimodal LLM then synthesises everything into compliance dashboards, shift reports, and supervisor alerts.</p>
+
+    <div class="iaas-wrap">
+      <div class="iaas-title-bar">
+        <h3>Intelligence as a Service (IaaS) — AI Stack</h3>
+        <span class="iaas-badge">MULTIMODAL LLM CORE</span>
+      </div>
+      <div class="iaas-stack">
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 1</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell"><span class="cell-icon">📷</span><span class="cell-label">Floor Cameras</span><span class="cell-sub">Production lines + forklift lanes</span></div>
+            <div class="iaas-cell"><span class="cell-icon">🚧</span><span class="cell-label">Zone Cameras</span><span class="cell-sub">Restricted areas + dock entrances</span></div>
+            <div class="iaas-cell"><span class="cell-icon">📡</span><span class="cell-label">Sensor Feeds</span><span class="cell-sub">RFID + environmental sensors</span></div>
+            <div class="iaas-cell"><span class="cell-icon">🗺️</span><span class="cell-label">Floor Maps</span><span class="cell-sub">Zone definitions + speed limits</span></div>
+          </div>
+        </div>
+
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.3">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+        </div>
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 2</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell highlight"><span class="cell-icon">🦺</span><span class="cell-label">Multi-Class PPE Detector</span><span class="cell-sub">Helmet, vest, gloves, goggles, shoes</span></div>
+            <div class="iaas-cell highlight"><span class="cell-icon">🚜</span><span class="cell-label">Object + Speed Estimator</span><span class="cell-sub">Forklift/vehicle zone speed tracking</span></div>
+            <div class="iaas-cell highlight"><span class="cell-icon">🔍</span><span class="cell-label">Industrial Defect CNN</span><span class="cell-sub">Surface defect, dimension, label error</span></div>
+            <div class="iaas-cell highlight"><span class="cell-icon">🔥</span><span class="cell-label">Smoke/Fire/Spill Model</span><span class="cell-sub">Early environmental hazard detection</span></div>
+          </div>
+        </div>
+
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.3">↓</div>
+          <div class="iaas-down-arrow" style="flex:4;text-align:center;font-size:12px;color:#6b7280">↓ Edge events streamed to cloud intelligence layer</div>
+        </div>
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 3</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell green-hl" style="flex:2"><span class="cell-icon">🤖</span><span class="cell-label">Multimodal LLM Core</span><span class="cell-sub">Synthesises safety events, compliance data & operations metrics into auditable factory intelligence</span></div>
+            <div class="iaas-cell"><span class="cell-icon">🗄️</span><span class="cell-label">Plant Context DB</span><span class="cell-sub">Zone rules, shift schedules, PPE policy</span></div>
+            <div class="iaas-cell"><span class="cell-icon">📐</span><span class="cell-label">Compliance Engine</span><span class="cell-sub">ISO 45001 rules + Factories Act mapping</span></div>
+          </div>
+        </div>
+
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.3">↓</div>
+          <div class="iaas-down-arrow" style="flex:4;text-align:center;font-size:12px;color:#6b7280">↓ Intelligence delivered as outputs</div>
+        </div>
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 4</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">📊</span><span class="cell-label">Safety Dashboard</span><span class="cell-sub">Safety officer + management</span></div>
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">📱</span><span class="cell-label">Supervisor App</span><span class="cell-sub">Real-time alerts per zone</span></div>
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">🔗</span><span class="cell-label">ERP/WMS Integration</span><span class="cell-sub">Inventory & QC data feed</span></div>
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">📝</span><span class="cell-label">Compliance Reports</span><span class="cell-sub">ISO 45001 + Factories Act audit export</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPECTED BENEFITS ═══════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Expected Outcomes</p>
+    <h2 class="section-title">What Factory & Warehouse Operators Can Expect</h2>
+    <p class="section-desc">Benchmark-based projections from comparable industrial deployments. All data is indicative — actual results vary by site configuration and industry.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#ea580c">~70%</div>
+        <div class="benefit-label">Reduction in Workplace Accidents</div>
+        <div class="benefit-desc">Real-time PPE and hazard zone enforcement removes the human attention gap in manual safety monitoring — the root cause of most preventable accidents.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:70%;background:#ea580c"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#1a56db">~95%</div>
+        <div class="benefit-label">PPE Compliance Rate</div>
+        <div class="benefit-desc">Continuous AI monitoring with real-time supervisor alerts drives compliance from typical 60–70% manual rates to near-full coverage on monitored floors.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:95%;background:#1a56db"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#e3a008">~80%</div>
+        <div class="benefit-label">Reduction in Defect Escape Rate</div>
+        <div class="benefit-desc">Inline defect CNN catches surface anomalies, dimension mismatches, and label errors before goods leave the production line — reducing costly rework and customer returns.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:80%;background:#e3a008"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#e02424">⚡ Live</div>
+        <div class="benefit-label">Restricted Zone Alerts</div>
+        <div class="benefit-desc">Sub-5 second geo-fence alerts when any unauthorised person enters hazmat or machinery zones — compared to manual patrol cycles of 30–60 minutes.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:90%;background:#e02424"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#0891b2">~30%</div>
+        <div class="benefit-label">Improvement in Inventory Accuracy</div>
+        <div class="benefit-desc">RFID-vision fusion at dock entry/exit eliminates manual count errors and reduces inventory discrepancy that costs 2–5% of stock value annually.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:30%;background:#0891b2"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#4f46e5">100%</div>
+        <div class="benefit-label">ISO 45001 Digital Audit Trail</div>
+        <div class="benefit-desc">Every compliance event — PPE check, zone breach, near-miss — is timestamped and exportable, creating the documented evidence base auditors and insurers require.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#4f46e5"></div></div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:24px;font-family:'IBM Plex Mono',monospace;">* Indicative outcomes based on benchmark industry data. Actual results vary by site configuration and scale.</p>
+  </div>
+</section>
+
+<!-- ══ URGENCY + ROADMAP + CTA ════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Market Urgency</p>
+    <h2 class="section-title">Why Industrial Operators Are Moving Now</h2>
+    <p class="section-desc">Factories Act, ISO 45001, and rising insurer scrutiny demand documented, auditable safety. Manual CCTV cannot produce the evidence trail that regulators now require. Vision AI creates it automatically.</p>
+
+    <div class="urgency-band">
+      <div class="urgency-icon">⚡</div>
+      <div class="urgency-body">
+        <h4>~48,000 Fatal Industrial Accidents/Year in India — Most Preventable</h4>
+        <p>PPE non-compliance causes 30–40% of preventable accidents (indicative benchmark). ISO 45001 and the Factories Act push toward documented, auditable safety. Manual CCTV fails audits. Vision AI creates automated timestamped compliance records that regulators and insurers now require.</p>
+        <div class="phase-row">
+          <div class="phase-item">
+            <strong>Phase 1 — Safety Zone Pilot</strong>
+            Highest-risk zones: hazmat + forklift lanes. Core: PPE + restricted zone alerts.
+            <span style="color:var(--muted);display:block;margin-top:4px">2–3 months</span>
+          </div>
+          <div class="phase-item">
+            <strong>Phase 2 — Full Floor Coverage</strong>
+            All production lines. Add QC inspection + smoke/fire detection.
+            <span style="color:var(--muted);display:block;margin-top:4px">3–9 months</span>
+          </div>
+          <div class="phase-item">
+            <strong>Phase 3 — Plant Intelligence</strong>
+            Multi-plant rollout, ERP integration, predictive maintenance AI.
+            <span style="color:var(--muted);display:block;margin-top:4px">Ongoing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;background:var(--ink);border-radius:16px;padding:40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div>
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fb923c;margin-bottom:12px;">GET STARTED</p>
+        <h3 style="font-size:24px;font-weight:800;color:#ffffff;margin-bottom:8px;">Prototype is Free.<br>Book a Demo Now.</h3>
+        <p style="font-size:14px;color:#9ca3af;font-weight:300;">See Yantra AI running live on your factory floor — PPE compliance, zone alerts, and safety dashboards in real time.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:200px;">
+        <a href="#" style="background:#1a56db;color:#fff;padding:14px 28px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;text-align:center;">Book a Demo →</a>
+        <a href="#" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#e5e7eb;padding:12px 28px;border-radius:8px;font-weight:500;font-size:13px;text-decoration:none;text-align:center;">View All Sectors</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<div class="doc-footer">
+  <div>
+    <span>Yantra AI Solutions</span> — Vision AI for Factories & Warehouses<br>
+    Confidential Case Study · One Godown Pvt Ltd
+  </div>
+  <div style="text-align:right;">
+    Indicative Data · Benchmark-based<br>
+    <span>IIT/NIT Founded · Prototype Stage</span>
+  </div>
+</div>
+
+</body>
+</html>
