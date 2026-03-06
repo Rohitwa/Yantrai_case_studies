@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yantra AI — All Sector Use Cases</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d1117; --bg: #f7f6f2; --white: #fff;
+    --muted: #6b7280; --border: #e5e7eb;
+    --accent: #1a56db;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--ink); font-size: 15px; }
+
+  /* === HERO === */
+  .hero {
+    background: var(--ink); color: var(--white);
+    padding: 52px 60px 44px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 360px; height: 360px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,86,219,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase; color: #60a5fa; margin-bottom: 16px;
+  }
+  .hero h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; line-height: 1.2; }
+  .hero h1 span { color: #60a5fa; }
+  .hero p { color: #9ca3af; font-size: 15px; font-weight: 300; max-width: 620px; }
+
+  /* === TAB BAR === */
+  .tab-bar-wrap {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .tab-bar {
+    display: flex; overflow-x: auto;
+    padding: 0 40px;
+    gap: 0;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 16px 22px;
+    font-size: 13px; font-weight: 600;
+    color: var(--muted); background: none; border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer; font-family: 'Sora', sans-serif;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--ink); border-bottom-color: var(--accent); }
+  .tab .tab-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .tab .tab-count {
+    background: #f3f4f6; color: #6b7280;
+    font-size: 10px; font-weight: 700;
+    padding: 1px 6px; border-radius: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .tab.active .tab-count { background: #eff6ff; color: #1d4ed8; }
+
+  /* === TAB CONTENT === */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .tab-section {
+    max-width: 1120px; margin: 0 auto; padding: 48px 40px;
+  }
+  .tab-section-header { margin-bottom: 36px; }
+  .tab-section-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .tab-section-title { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+  .tab-section-desc { font-size: 13px; color: var(--muted); max-width: 600px; line-height: 1.6; }
+
+  /* === USE CASE CARDS === */
+  .uc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .uc-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 22px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .uc-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.09);
+    transform: translateY(-2px);
+  }
+  .uc-card::after {
+    content: ''; position: absolute; top: 0; left: 0;
+    right: 0; height: 3px; border-radius: 14px 14px 0 0;
+  }
+  .uc-card.blue::after   { background: var(--accent); }
+  .uc-card.amber::after  { background: #d97706; }
+  .uc-card.red::after    { background: #e02424; }
+  .uc-card.green::after  { background: #0e9f6e; }
+  .uc-card.teal::after   { background: #0891b2; }
+  .uc-card.purple::after { background: #7c3aed; }
+  .uc-card.orange::after { background: #ea580c; }
+  .uc-card.indigo::after { background: #4f46e5; }
+  .uc-card.yellow::after { background: #ca8a04; }
+
+  .uc-emoji { font-size: 24px; margin-bottom: 10px; }
+  .uc-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+  .uc-desc { font-size: 12px; color: var(--muted); margin-bottom: 12px; line-height: 1.55; }
+  .uc-solution {
+    font-size: 10px; font-family: 'IBM Plex Mono', monospace;
+    background: var(--bg); border-radius: 5px;
+    padding: 5px 9px; color: var(--ink); margin-bottom: 12px;
+  }
+  .uc-kpi {
+    font-size: 11px; font-weight: 600;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .kpi-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+  /* === CTA BAR === */
+  .cta-bar {
+    background: var(--ink); padding: 40px 60px;
+    display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  }
+  .cta-bar h3 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+  .cta-bar p { color: #9ca3af; font-size: 14px; }
+  .cta-btn {
+    background: var(--accent); color: var(--white);
+    padding: 14px 32px; border-radius: 8px;
+    font-weight: 700; font-size: 14px; cursor: pointer; border: none;
+    font-family: 'Sora', sans-serif; transition: background 0.2s; white-space: nowrap;
+  }
+  .cta-btn:hover { background: #1d4ed8; }
+
+  @media (max-width: 860px) {
+    .tab-section { padding: 32px 20px; }
+    .cta-bar { flex-direction: column; padding: 32px 24px; text-align: center; }
+    .hero { padding: 40px 24px; }
+    .hero h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Vision AI · All Sectors · Yantra AI Solutions</p>
+  <h1>Complete Platform Coverage.<br><span>Every Sector. Every Use Case.</span></h1>
+  <p>All Vision AI use cases across Hospitals, Residential Societies and Shopping Malls — one Intelligence-as-a-Service platform, deployed on your existing cameras.</p>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar-wrap">
+  <div class="tab-bar">
+    <button class="tab active" onclick="showTab('hospitals')">
+      <span class="tab-dot" style="background:#0e9f6e"></span>
+      Hospitals <span class="tab-count">6</span>
+    </button>
+    <button class="tab" onclick="showTab('residential')">
+      <span class="tab-dot" style="background:#0891b2"></span>
+      Residential Societies <span class="tab-count">6</span>
+    </button>
+    <button class="tab" onclick="showTab('malls')">
+      <span class="tab-dot" style="background:#7c3aed"></span>
+      Shopping Malls <span class="tab-count">6</span>
+    </button>
+  </div>
+</div>
+
+<!-- ═══ HOSPITALS TAB ═══ -->
+<div class="tab-content active" id="tab-hospitals">
+  <div class="tab-section">
+    <div class="tab-section-header">
+      <p class="tab-section-eyebrow" style="color:#0e9f6e">Vision AI · Hospitals &amp; Healthcare</p>
+      <h2 class="tab-section-title">Hospitals &amp; Healthcare Facilities</h2>
+      <p class="tab-section-desc">From patient fall detection to NABH-ready compliance — Vision AI creates the documented, real-time safety layer hospitals now require. All data indicative or benchmark-based.</p>
+    </div>
+    <div class="uc-grid">
+
+      <div class="uc-card blue">
+        <div class="uc-emoji">🏥</div>
+        <div class="uc-title">Patient Fall Detection</div>
+        <div class="uc-desc">Posture estimation detects fall events from body keypoint changes in real time. Nurse alerts are sent in under 30 seconds — dramatically reducing response time and liability exposure.</div>
+        <div class="uc-solution">Posture Estimation + Instant Nurse Alert</div>
+        <div class="uc-kpi" style="color:var(--accent)"><span class="kpi-dot"></span>Response time · Fall incidents per ward</div>
+      </div>
+
+      <div class="uc-card green">
+        <div class="uc-emoji">🧤</div>
+        <div class="uc-title">Staff PPE Compliance</div>
+        <div class="uc-desc">Multi-class PPE detector identifies mask, gloves, gown and cap per staff member per zone. Real-time non-compliance alerts support NABH accreditation standards and infection control protocols.</div>
+        <div class="uc-solution">Multi-Class PPE Detector + Zone Rules</div>
+        <div class="uc-kpi" style="color:#0e9f6e"><span class="kpi-dot"></span>Compliance % · NABH audit score</div>
+      </div>
+
+      <div class="uc-card yellow">
+        <div class="uc-emoji">🚪</div>
+        <div class="uc-title">Restricted Zone Access Control</div>
+        <div class="uc-desc">Face recognition with access policy engine controls entry to OT, ICU and pharmacy areas. Every access event is logged with identity verification, creating an automated compliance record for administrators.</div>
+        <div class="uc-solution">Face Recognition + Access Policy Engine</div>
+        <div class="uc-kpi" style="color:#ca8a04"><span class="kpi-dot"></span>Breach incidents · Compliance log completeness</div>
+      </div>
+
+      <div class="uc-card red">
+        <div class="uc-emoji">🚶</div>
+        <div class="uc-title">Wandering Patient Monitoring</div>
+        <div class="uc-desc">Pose and movement tracking detects unusual patient movement — wandering toward exits or restricted areas — and sends location alerts to ward staff before patients leave safe zones.</div>
+        <div class="uc-solution">Pose + Movement Tracking + Location Alert</div>
+        <div class="uc-kpi" style="color:#e02424"><span class="kpi-dot"></span>Detection rate · Response time</div>
+      </div>
+
+      <div class="uc-card teal">
+        <div class="uc-emoji">🪪</div>
+        <div class="uc-title">Visitor Management &amp; Logging</div>
+        <div class="uc-desc">Face capture at entry with host mobile notification creates a complete, automated visitor log. Unauthorised entries are flagged in real time, replacing manual registers with a fully auditable digital trail.</div>
+        <div class="uc-solution">Face Capture + Host Notification</div>
+        <div class="uc-kpi" style="color:#0891b2"><span class="kpi-dot"></span>Visitor log completeness · Unauth entries</div>
+      </div>
+
+      <div class="uc-card indigo">
+        <div class="uc-emoji">⚡</div>
+        <div class="uc-title">Emergency Response — Code Blue</div>
+        <div class="uc-desc">Activity recognition detects Code Blue events and triggers emergency routing to nearest available staff. Indicative benchmark: ~50% faster Code Blue response time versus manual alert systems.</div>
+        <div class="uc-solution">Activity Recognition + Emergency Routing</div>
+        <div class="uc-kpi" style="color:#4f46e5"><span class="kpi-dot"></span>Response time · Staff arrival time</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RESIDENTIAL TAB ═══ -->
+<div class="tab-content" id="tab-residential">
+  <div class="tab-section">
+    <div class="tab-section-header">
+      <p class="tab-section-eyebrow" style="color:#0891b2">Vision AI · Residential Societies &amp; RWAs</p>
+      <h2 class="tab-section-title">Residential Societies &amp; Gated Communities</h2>
+      <p class="tab-section-desc">From 8-second face recognition entry to 24/7 perimeter monitoring — Vision AI replaces manual logbooks with a fully digital, measurable security layer. All data indicative or benchmark-based.</p>
+    </div>
+    <div class="uc-grid">
+
+      <div class="uc-card blue">
+        <div class="uc-emoji">🏠</div>
+        <div class="uc-title">Resident Face Recognition Entry</div>
+        <div class="uc-desc">On-device face recognition opens the barrier gate in ~8 seconds versus 45+ seconds for manual verification. No cloud dependency — recognition runs at the edge for privacy and reliability even offline.</div>
+        <div class="uc-solution">Face Recognition + Barrier Control</div>
+        <div class="uc-kpi" style="color:var(--accent)"><span class="kpi-dot"></span>Entry time · Manual intervention rate</div>
+      </div>
+
+      <div class="uc-card teal">
+        <div class="uc-emoji">🪪</div>
+        <div class="uc-title">Visitor Management System</div>
+        <div class="uc-desc">Visitors are face-captured at the gate and a mobile notification is sent to the host resident for approval. Every visit is automatically logged — replacing paper registers with a searchable, tamper-proof digital record.</div>
+        <div class="uc-solution">Face Capture + Host Mobile Notification</div>
+        <div class="uc-kpi" style="color:#0891b2"><span class="kpi-dot"></span>Visitor log completeness · Entry time</div>
+      </div>
+
+      <div class="uc-card yellow">
+        <div class="uc-emoji">🚗</div>
+        <div class="uc-title">Vehicle ANPR at Gates</div>
+        <div class="uc-desc">Automatic Number Plate Recognition reads Indian plates day and night, granting access to registered vehicles and flagging unregistered entries in real time. Full vehicle throughput and access audit trail maintained automatically.</div>
+        <div class="uc-solution">ANPR Engine + Access Control</div>
+        <div class="uc-kpi" style="color:#ca8a04"><span class="kpi-dot"></span>Vehicle throughput · Unregistered entries</div>
+      </div>
+
+      <div class="uc-card red">
+        <div class="uc-emoji">🚶‍♂️</div>
+        <div class="uc-title">Tailgating Detection</div>
+        <div class="uc-desc">Multi-person gate counter detects when more individuals enter on a single access event than authorised. Instant guard alert is triggered for each tailgate incident, with ~95% detection rate (indicative benchmark).</div>
+        <div class="uc-solution">Multi-Person Entry Counter + Alert</div>
+        <div class="uc-kpi" style="color:#e02424"><span class="kpi-dot"></span>Tailgate events caught per day</div>
+      </div>
+
+      <div class="uc-card green">
+        <div class="uc-emoji">🌙</div>
+        <div class="uc-title">Night Perimeter Monitoring</div>
+        <div class="uc-desc">Low-light anomaly detection operates in under 1 lux conditions, monitoring perimeter walls and entry points throughout the night. Guard alerts are generated automatically — no human attention required to maintain night coverage.</div>
+        <div class="uc-solution">Low-light Anomaly Detection + Guard Alert</div>
+        <div class="uc-kpi" style="color:#0e9f6e"><span class="kpi-dot"></span>Night incidents · Response time</div>
+      </div>
+
+      <div class="uc-card indigo">
+        <div class="uc-emoji">🧹</div>
+        <div class="uc-title">Domestic Staff &amp; Delivery Logging</div>
+        <div class="uc-desc">Face-based entry-exit tracking creates a complete, automated attendance record for domestic staff and delivery personnel. RWA management gets a fully searchable digital audit trail, replacing paper logs entirely.</div>
+        <div class="uc-solution">Face Log + Entry-Exit Tracker</div>
+        <div class="uc-kpi" style="color:#4f46e5"><span class="kpi-dot"></span>Staff attendance accuracy · Delivery audit completeness</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SHOPPING MALLS TAB ═══ -->
+<div class="tab-content" id="tab-malls">
+  <div class="tab-section">
+    <div class="tab-section-header">
+      <p class="tab-section-eyebrow" style="color:#7c3aed">Vision AI · Shopping Malls &amp; Retail Complexes</p>
+      <h2 class="tab-section-title">Shopping Malls &amp; Organised Retail</h2>
+      <p class="tab-section-desc">From anti-shoplifting AI to tenant performance analytics — Vision AI turns passive CCTV into a revenue and safety intelligence layer for India's 750+ organised malls. All data indicative or benchmark-based.</p>
+    </div>
+    <div class="uc-grid">
+
+      <div class="uc-card blue">
+        <div class="uc-emoji">🛍️</div>
+        <div class="uc-title">Shoplifting Detection</div>
+        <div class="uc-desc">Behaviour analysis detects concealment actions, unusual item handling and suspicious movement patterns — alerting security before exit. Indicative benchmark: ~60% reduction in retail shrinkage with AI-enabled loss prevention.</div>
+        <div class="uc-solution">Behaviour Analysis + Alert Engine</div>
+        <div class="uc-kpi" style="color:var(--accent)"><span class="kpi-dot"></span>Shrinkage % · Incident response time</div>
+      </div>
+
+      <div class="uc-card purple">
+        <div class="uc-emoji">📊</div>
+        <div class="uc-title">Footfall &amp; Zone Heatmaps</div>
+        <div class="uc-desc">People counting at every entry and zone maps visitor flow across the mall. Dwell time analytics per zone reveal high-converting anchor areas and underperforming corridors — informing leasing, layout and promotional decisions.</div>
+        <div class="uc-solution">People Counter + Zone Analytics</div>
+        <div class="uc-kpi" style="color:#7c3aed"><span class="kpi-dot"></span>Visitors per hour · Dwell time per zone</div>
+      </div>
+
+      <div class="uc-card yellow">
+        <div class="uc-emoji">🚶</div>
+        <div class="uc-title">Queue Length Monitoring</div>
+        <div class="uc-desc">Queue detection from overhead cameras measures length and wait times at food courts, anchor stores and service desks. Manager alerts trigger before queue abandonment — indicative benchmark: ~40% reduction in abandonment rate.</div>
+        <div class="uc-solution">Queue Detection + Manager Alerts</div>
+        <div class="uc-kpi" style="color:#ca8a04"><span class="kpi-dot"></span>Queue wait time · Abandonment rate</div>
+      </div>
+
+      <div class="uc-card red">
+        <div class="uc-emoji">🚗</div>
+        <div class="uc-title">Parking ANPR &amp; Management</div>
+        <div class="uc-desc">Number plate recognition at entry and exit manages parking access, tracks vehicle throughput and flags unauthorised entry. Full audit trail eliminates manual ticketing errors and supports VIP or tenant reserved bay enforcement.</div>
+        <div class="uc-solution">ANPR Engine + Access Control</div>
+        <div class="uc-kpi" style="color:#e02424"><span class="kpi-dot"></span>Vehicle throughput · Unauthorised entries</div>
+      </div>
+
+      <div class="uc-card teal">
+        <div class="uc-emoji">🔥</div>
+        <div class="uc-title">Emergency &amp; Crowd Control</div>
+        <div class="uc-desc">Crowd density monitoring triggers evacuation routing AI when occupancy thresholds are breached. Real-time zone occupancy data and automated emergency alerts enable security teams to respond before situations escalate.</div>
+        <div class="uc-solution">Crowd Density + Evacuation AI</div>
+        <div class="uc-kpi" style="color:#0891b2"><span class="kpi-dot"></span>Response time · Zone occupancy real-time</div>
+      </div>
+
+      <div class="uc-card indigo">
+        <div class="uc-emoji">🎯</div>
+        <div class="uc-title">Tenant Performance Analytics</div>
+        <div class="uc-desc">Footfall attribution and conversion AI measures how many mall visitors enter each tenant store and what percentage convert to transactions. Tenant performance dashboards become a premium data product malls can offer alongside leases.</div>
+        <div class="uc-solution">Footfall Attribution + Conversion AI</div>
+        <div class="uc-kpi" style="color:#4f46e5"><span class="kpi-dot"></span>Tenant conversion % · Peak hour mapping</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CTA BAR -->
+<div class="cta-bar">
+  <div>
+    <h3>Prototype is Free. Book a Demo Now.</h3>
+    <p>See how Yantra AI Vision AI works on your existing cameras — no hardware commitment required.</p>
+  </div>
+  <button class="cta-btn" onclick="window.open('mailto:hello@yantrai.in', '_blank')">Book a Free Demo →</button>
+</div>
+
+<script>
+  function showTab(id) {
+    // Hide all contents
+    document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    // Show selected
+    const content = document.getElementById('tab-' + id);
+    if (content) content.classList.add('active');
+    // Activate tab button — find by onclick attribute
+    document.querySelectorAll('.tab').forEach(t => {
+      if (t.getAttribute('onclick') === "showTab('" + id + "')") {
+        t.classList.add('active');
+      }
+    });
+    // Scroll to top of content area
+    window.scrollTo({ top: document.querySelector('.tab-bar-wrap').offsetTop - 4, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

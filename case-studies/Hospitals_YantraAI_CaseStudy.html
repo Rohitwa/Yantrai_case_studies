@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yantra AI Solutions — Vision AI for Hospitals</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d1117;
+    --bg: #f7f6f2;
+    --white: #ffffff;
+    --accent: #1a56db;
+    --accent2: #0e9f6e;
+    --accent3: #e3a008;
+    --accent4: #e02424;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --card: #ffffff;
+    --tag-bg: #eef2ff;
+    --tag-fg: #3730a3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.7; }
+
+  .hero { background: var(--ink); color: var(--white); padding: 64px 60px 56px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(14,159,110,0.22) 0%, transparent 70%); pointer-events: none; }
+  .hero-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #6ee7b7; margin-bottom: 18px; }
+  .hero h1 { font-size: 42px; font-weight: 800; line-height: 1.15; max-width: 700px; margin-bottom: 20px; }
+  .hero h1 span { color: #6ee7b7; }
+  .hero-sub { font-size: 16px; color: #9ca3af; max-width: 600px; font-weight: 300; margin-bottom: 36px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+  .badge { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #e5e7eb; padding: 6px 14px; border-radius: 40px; font-size: 12px; font-weight: 500; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .section-title { font-size: 26px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+  .section-desc { color: var(--muted); font-size: 14px; max-width: 620px; margin-bottom: 40px; font-weight: 400; }
+
+  .kpi-strip { background: var(--ink); padding: 0; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .kpi-item { padding: 36px 32px; border-right: 1px solid rgba(255,255,255,0.08); color: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-num { font-size: 44px; font-weight: 800; color: #6ee7b7; line-height: 1; margin-bottom: 6px; }
+  .kpi-label { font-size: 13px; color: #9ca3af; font-weight: 400; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .about-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+  .about-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .icon-blue { background: #dbeafe; }
+  .icon-green { background: #d1fae5; }
+  .icon-yellow { background: #fef3c7; }
+  .icon-teal { background: #cffafe; }
+
+  .usecase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .uc-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px; position: relative; overflow: hidden; transition: box-shadow 0.2s; }
+  .uc-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .uc-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
+  .uc-card.blue::after { background: var(--accent); }
+  .uc-card.green::after { background: #0e9f6e; }
+  .uc-card.yellow::after { background: var(--accent3); }
+  .uc-card.red::after { background: var(--accent4); }
+  .uc-card.teal::after { background: #0891b2; }
+  .uc-card.indigo::after { background: #4f46e5; }
+  .uc-emoji { font-size: 26px; margin-bottom: 12px; }
+  .uc-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .uc-desc { font-size: 12px; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+  .uc-solution { font-size: 11px; font-family: 'IBM Plex Mono', monospace; background: var(--bg); border-radius: 6px; padding: 6px 10px; color: var(--ink); margin-bottom: 14px; }
+  .uc-kpi { font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .kpi-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+  .iaas-wrap { background: #1e293b; border-radius: 16px; padding: 40px; color: var(--white); }
+  .iaas-title-bar { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+  .iaas-title-bar h3 { font-size: 18px; font-weight: 700; color: var(--white); }
+  .iaas-badge { background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.3); color: #93c5fd; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 1px; }
+  .iaas-stack { display: flex; flex-direction: column; gap: 4px; }
+  .iaas-row { display: flex; align-items: stretch; gap: 4px; }
+  .iaas-layer-label { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 9px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 2px; text-transform: uppercase; color: #6b7280; padding: 0 10px; display: flex; align-items: center; justify-content: center; min-width: 32px; }
+  .iaas-cells { display: flex; flex: 1; gap: 4px; }
+  .iaas-cell { flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 14px 16px; font-size: 12px; font-weight: 500; color: #e5e7eb; display: flex; flex-direction: column; gap: 4px; }
+  .iaas-cell.highlight { background: rgba(59,130,246,0.2); border-color: rgba(96,165,250,0.35); color: #bfdbfe; }
+  .iaas-cell.green-hl { background: rgba(16,185,129,0.18); border-color: rgba(52,211,153,0.3); color: #a7f3d0; }
+  .iaas-cell.yellow-hl { background: rgba(245,158,11,0.18); border-color: rgba(251,191,36,0.3); color: #fde68a; }
+  .iaas-cell .cell-icon { font-size: 16px; margin-bottom: 2px; }
+  .iaas-cell .cell-label { font-size: 11px; font-weight: 700; }
+  .iaas-cell .cell-sub { font-size: 10px; opacity: 0.7; font-family: 'IBM Plex Mono', monospace; }
+  .iaas-arrow-row { display: flex; justify-content: center; align-items: center; gap: 16px; padding: 4px 0; }
+  .iaas-down-arrow { color: #4b5563; font-size: 20px; flex: 1; text-align: center; }
+
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .benefit-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .benefit-num { font-size: 38px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+  .benefit-label { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .benefit-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .bar-track { margin-top: 14px; background: var(--border); border-radius: 4px; height: 6px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; }
+
+  .urgency-band { background: #fefce8; border: 1.5px solid #fde68a; border-radius: 12px; padding: 28px 32px; display: flex; gap: 20px; align-items: flex-start; }
+  .urgency-icon { font-size: 28px; flex-shrink: 0; }
+  .urgency-body h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .urgency-body p { font-size: 13px; color: #78350f; line-height: 1.6; }
+  .phase-row { display: flex; gap: 12px; margin-top: 18px; }
+  .phase-item { flex: 1; background: var(--white); border: 1px solid #fde68a; border-radius: 8px; padding: 14px; font-size: 12px; }
+  .phase-item strong { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+
+  .doc-footer { background: var(--ink); color: #6b7280; padding: 28px 40px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .doc-footer span { font-weight: 600; color: #9ca3af; }
+
+  @media (max-width: 900px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .usecase-grid { grid-template-columns: repeat(2, 1fr); }
+    .benefits-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 24px; }
+    .hero h1 { font-size: 28px; }
+    .container { padding: 0 20px; }
+    .phase-row { flex-direction: column; }
+  }
+  @media print {
+    body { background: white; }
+    .hero { -webkit-print-color-adjust: exact; }
+    .kpi-strip { -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Vision AI · Hospitals · Yantra AI Solutions</p>
+    <h1>Safer Patients. Compliant Staff.<br><span>Always-On</span> Hospital Intelligence.</h1>
+    <p class="hero-sub">How Yantra AI Solutions delivers real-time fall detection, PPE compliance, and NABH-ready audit documentation across Indian hospital campuses — turning passive CCTV into active clinical safety intelligence.</p>
+    <div class="hero-badges">
+      <span class="badge">🏥 Patient Fall Detection</span>
+      <span class="badge">🧤 Staff PPE Compliance</span>
+      <span class="badge">🔒 Restricted Zone Access</span>
+      <span class="badge">🪪 Visitor Management</span>
+      <span class="badge">⚡ Code Blue Response AI</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ KPI STRIP ══════════════════════════════════════════ -->
+<div class="kpi-strip">
+  <div class="kpi-grid">
+    <div class="kpi-item">
+      <div class="kpi-num">&lt;30 sec</div>
+      <div class="kpi-label">Fall detection to nurse alert time (indicative)</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">~98%</div>
+      <div class="kpi-label">Staff PPE compliance on monitored wards (indicative)</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">~85%</div>
+      <div class="kpi-label">Reduction in patient fall response time (indicative)</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">Multi</div>
+      <div class="kpi-label">Multi-Use Cases across one platform</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT YANTRA ═══════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Company Overview</p>
+    <h2 class="section-title">Who is Yantra AI Solutions?</h2>
+    <p class="section-desc">An AI-first team from IIT/NIT backgrounds building clinical Vision AI that creates documented, NABH-ready safety records on existing hospital camera infrastructure.</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3><span class="icon icon-blue">🎓</span> IIT/NIT Founders</h3>
+        <p style="font-size:13px;color:var(--muted);">Research-grade AI applied to clinical safety and compliance. Founders bring deep expertise in computer vision and healthcare operations systems.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-green">🏥</span> NABH Accreditation Aligned</h3>
+        <p style="font-size:13px;color:var(--muted);">Every safety event is timestamped and exported in NABH-compatible formats — creating the documented evidence base accreditation audits now require.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-yellow">⚡</span> Sub-30 Second Fall Response</h3>
+        <p style="font-size:13px;color:var(--muted);">AI detects patient falls from body keypoint changes and pushes instant alerts to nursing station screens and staff mobiles — reducing harm from delayed response.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-teal">🧩</span> Modular Clinical Safety Stack</h3>
+        <p style="font-size:13px;color:var(--muted);">Start with fall detection in high-risk wards. Add PPE compliance, restricted zone access, visitor management, and emergency routing progressively.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ USE CASES ══════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Platform Capabilities</p>
+    <h2 class="section-title">Multi-Use Cases. One Integrated Platform.</h2>
+    <p class="section-desc">From patient fall detection to Code Blue emergency routing — every clinical safety module runs on the same AI stack, sharing cameras and compute across your hospital campus.</p>
+    <div class="usecase-grid">
+
+      <div class="uc-card blue">
+        <div class="uc-emoji">🏥</div>
+        <div class="uc-title">Patient Fall Detection</div>
+        <div class="uc-desc">Posture estimation AI monitors patient body keypoints in ICU and elderly wards — detecting fall events in under a second and pushing instant alerts to nursing station screens and staff mobile apps.</div>
+        <div class="uc-solution">Posture Estimation + Instant Nurse Alert</div>
+        <div class="uc-kpi" style="color:#1a56db"><span class="kpi-dot"></span>&lt;30 sec detection to nurse alert · ~85% faster response</div>
+      </div>
+
+      <div class="uc-card green">
+        <div class="uc-emoji">🧤</div>
+        <div class="uc-title">Staff PPE Compliance</div>
+        <div class="uc-desc">Multi-class PPE detector monitors mask, gloves, gown, and cap compliance per staff member per zone — generating NABH-ready audit logs and alerting supervisors when clinical areas fall below compliance thresholds.</div>
+        <div class="uc-solution">Multi-Class PPE Detector + Zone Rules</div>
+        <div class="uc-kpi" style="color:#0e9f6e"><span class="kpi-dot"></span>~98% compliance rate · Automated NABH log</div>
+      </div>
+
+      <div class="uc-card yellow">
+        <div class="uc-emoji">🚪</div>
+        <div class="uc-title">Restricted Zone Access Control</div>
+        <div class="uc-desc">Face recognition enforces access policy at OT, ICU, pharmacy, and high-risk labs — logging every entry, flagging unauthorised access, and generating the access audit trail NABH accreditation requires.</div>
+        <div class="uc-solution">Face Recognition + Access Policy Engine</div>
+        <div class="uc-kpi" style="color:#e3a008"><span class="kpi-dot"></span>~90% reduction in restricted zone breaches</div>
+      </div>
+
+      <div class="uc-card red">
+        <div class="uc-emoji">🚶</div>
+        <div class="uc-title">Wandering Patient Monitoring</div>
+        <div class="uc-desc">Movement anomaly AI tracks patient location patterns and flags unusual movement — detecting ward exit attempts, rapid exits, and disorientation events before patients reach unsafe areas.</div>
+        <div class="uc-solution">Pose + Movement Tracking + Location Alert</div>
+        <div class="uc-kpi" style="color:#e02424"><span class="kpi-dot"></span>Real-time wandering alerts · Staff location push</div>
+      </div>
+
+      <div class="uc-card teal">
+        <div class="uc-emoji">🪪</div>
+        <div class="uc-title">Visitor Management & Logging</div>
+        <div class="uc-desc">Face capture at entry points logs every visitor, notifies the patient host, and generates a complete visitor audit trail — replacing manual logbooks with accurate, searchable digital records for NABH compliance.</div>
+        <div class="uc-solution">Face Capture + Host Notification</div>
+        <div class="uc-kpi" style="color:#0891b2"><span class="kpi-dot"></span>100% visitor log completeness · Unauth entries flagged</div>
+      </div>
+
+      <div class="uc-card indigo">
+        <div class="uc-emoji">⚡</div>
+        <div class="uc-title">Emergency Response — Code Blue</div>
+        <div class="uc-desc">Activity recognition AI detects Code Blue events — patient collapse, cardiac arrest posture — and triggers emergency routing to the nearest crash team with staff location data, cutting response time by ~50%.</div>
+        <div class="uc-solution">Activity Recognition + Emergency Routing</div>
+        <div class="uc-kpi" style="color:#4f46e5"><span class="kpi-dot"></span>~50% faster Code Blue response · Staff ETA shown</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ IAAS STACK ══════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">IaaS — Intelligence as a Service</p>
+    <h2 class="section-title">The AI Stack That Powers IaaS</h2>
+    <p class="section-desc">Clinical cameras, nurse call systems, and access sensors feed edge AI — a multimodal LLM synthesises everything into patient safety intelligence and NABH-compliant documentation, continuously and automatically.</p>
+
+    <div class="iaas-wrap">
+      <div class="iaas-title-bar">
+        <h3>Intelligence as a Service (IaaS) — AI Stack</h3>
+        <span class="iaas-badge">MULTIMODAL LLM CORE</span>
+      </div>
+      <div class="iaas-stack">
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 1</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell"><span class="cell-icon">📷</span><span class="cell-label">Clinical Cameras</span><span class="cell-sub">ICU, ward, OT corridor feeds</span></div>
+            <div class="iaas-cell"><span class="cell-icon">🔑</span><span class="cell-label">Access Sensors</span><span class="cell-sub">OT/pharmacy/ICU entry points</span></div>
+            <div class="iaas-cell"><span class="cell-icon">🔔</span><span class="cell-label">Nurse Call Data</span><span class="cell-sub">Alert triggers + sensor feeds</span></div>
+            <div class="iaas-cell"><span class="cell-icon">🗂️</span><span class="cell-label">Clinical Config</span><span class="cell-sub">Zone policies, PPE rules, staff roster</span></div>
+          </div>
+        </div>
+
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.3">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+        </div>
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 2</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell highlight"><span class="cell-icon">🏥</span><span class="cell-label">Posture Estimation Model</span><span class="cell-sub">Fall detection from body keypoints</span></div>
+            <div class="iaas-cell highlight"><span class="cell-icon">🧤</span><span class="cell-label">Clinical PPE Detector</span><span class="cell-sub">Mask, gloves, gown, cap per zone</span></div>
+            <div class="iaas-cell highlight"><span class="cell-icon">🚶</span><span class="cell-label">Movement Anomaly Tracker</span><span class="cell-sub">Wandering, rapid exit, disorientation</span></div>
+            <div class="iaas-cell highlight"><span class="cell-icon">🪪</span><span class="cell-label">Face Recognition</span><span class="cell-sub">OT/ICU/pharmacy identity verification</span></div>
+          </div>
+        </div>
+
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.3">↓</div>
+          <div class="iaas-down-arrow" style="flex:4;text-align:center;font-size:12px;color:#6b7280">↓ Edge events streamed to clinical intelligence layer</div>
+        </div>
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 3</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell green-hl" style="flex:2"><span class="cell-icon">🤖</span><span class="cell-label">Multimodal LLM Core</span><span class="cell-sub">Synthesises clinical safety events, compliance data & patient monitoring into NABH-ready documentation and actionable alerts</span></div>
+            <div class="iaas-cell"><span class="cell-icon">🗄️</span><span class="cell-label">Clinical Context DB</span><span class="cell-sub">Patient records, zone PPE policy, staff rosters</span></div>
+            <div class="iaas-cell"><span class="cell-icon">📐</span><span class="cell-label">NABH Compliance Engine</span><span class="cell-sub">Protocol mapping + audit trail generator</span></div>
+          </div>
+        </div>
+
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.3">↓</div>
+          <div class="iaas-down-arrow" style="flex:4;text-align:center;font-size:12px;color:#6b7280">↓ Intelligence delivered as outputs</div>
+        </div>
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 4</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">🏥</span><span class="cell-label">Nursing Station Dashboard</span><span class="cell-sub">Live patient safety alerts per ward</span></div>
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">📱</span><span class="cell-label">Administrator App</span><span class="cell-sub">Compliance metrics + alerts</span></div>
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">📋</span><span class="cell-label">NABH Audit Reports</span><span class="cell-sub">Auto-generated compliance documentation</span></div>
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">🔔</span><span class="cell-label">Alert System</span><span class="cell-sub">Fall, Code Blue, zone breach alerts</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPECTED BENEFITS ═══════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Expected Outcomes</p>
+    <h2 class="section-title">What Hospital Administrators Can Expect</h2>
+    <p class="section-desc">Benchmark-based projections from comparable clinical deployments. All data is indicative — actual results vary by ward configuration and patient demographics.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#0e9f6e">&lt;30 sec</div>
+        <div class="benefit-label">Fall Detection to Nurse Alert</div>
+        <div class="benefit-desc">From patient fall event to nursing station alert in under 30 seconds — compared to delayed discovery in manual monitoring scenarios that can take minutes.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:92%;background:#0e9f6e"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#1a56db">~98%</div>
+        <div class="benefit-label">Staff PPE Compliance</div>
+        <div class="benefit-desc">Continuous AI monitoring drives compliance from typical 70–80% manual-check rates to near-complete coverage on monitored wards — reducing infection risk and NABH audit exposure.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:98%;background:#1a56db"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#e3a008">~90%</div>
+        <div class="benefit-label">Reduction in Restricted Zone Breaches</div>
+        <div class="benefit-desc">Face recognition enforces OT and ICU access policy without burdening staff — removing unauthorised entries that create infection risk and liability.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:90%;background:#e3a008"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#e02424">~50%</div>
+        <div class="benefit-label">Faster Code Blue Response</div>
+        <div class="benefit-desc">Activity recognition detects collapse events and routes the nearest crash team instantly — cutting the critical response window that determines patient outcomes in cardiac emergencies.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:50%;background:#e02424"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#0891b2">100%</div>
+        <div class="benefit-label">Visitor Audit Trail</div>
+        <div class="benefit-desc">Every visitor logged with face capture, timestamp, and host notification — replacing manual logbooks with searchable, NABH-compliant visitor records across all entry points.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#0891b2"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#4f46e5">NABH</div>
+        <div class="benefit-label">Ready Compliance Documentation</div>
+        <div class="benefit-desc">AI automatically generates the timestamped safety logs, PPE compliance records, and access audit trails that NABH accreditation audits require — eliminating manual documentation burden.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:85%;background:#4f46e5"></div></div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:24px;font-family:'IBM Plex Mono',monospace;">* Indicative outcomes based on benchmark clinical data. Actual results vary by ward configuration and patient demographics.</p>
+  </div>
+</section>
+
+<!-- ══ URGENCY + ROADMAP + CTA ════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Market Urgency</p>
+    <h2 class="section-title">Why Hospitals Are Moving Now</h2>
+    <p class="section-desc">NABH requirements and medical liability awareness push hospitals toward documented, real-time safety compliance. Manual CCTV cannot produce the audit trails accreditation demands. Vision AI creates the evidence base automatically.</p>
+
+    <div class="urgency-band">
+      <div class="urgency-icon">⚡</div>
+      <div class="urgency-body">
+        <h4>70,000+ Hospitals in India. NABH Accreditation Demands More Evidence.</h4>
+        <p>Patient falls (3–5 per 1,000 bed-days, benchmark) and PPE non-compliance linked to hospital-acquired infections create measurable liability. NABH accreditation now requires documented proof of safety protocols — manual CCTV cannot deliver it. Vision AI does.</p>
+        <div class="phase-row">
+          <div class="phase-item">
+            <strong>Phase 1 — High-Risk Ward Pilot</strong>
+            ICU and elderly wards. Fall detection + PPE compliance activated.
+            <span style="color:var(--muted);display:block;margin-top:4px">2–3 months</span>
+          </div>
+          <div class="phase-item">
+            <strong>Phase 2 — Campus Coverage</strong>
+            All wards + OT/pharmacy access + visitor management live.
+            <span style="color:var(--muted);display:block;margin-top:4px">3–9 months</span>
+          </div>
+          <div class="phase-item">
+            <strong>Phase 3 — Hospital Network</strong>
+            Multi-branch, NABH audit integration, predictive patient risk scoring.
+            <span style="color:var(--muted);display:block;margin-top:4px">Ongoing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;background:var(--ink);border-radius:16px;padding:40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div>
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6ee7b7;margin-bottom:12px;">GET STARTED</p>
+        <h3 style="font-size:24px;font-weight:800;color:#ffffff;margin-bottom:8px;">Prototype is Free.<br>Book a Demo Now.</h3>
+        <p style="font-size:14px;color:#9ca3af;font-weight:300;">See Yantra AI running live on your hospital wards — fall detection, PPE compliance, and NABH documentation in real time.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:200px;">
+        <a href="#" style="background:#1a56db;color:#fff;padding:14px 28px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;text-align:center;">Book a Demo →</a>
+        <a href="#" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#e5e7eb;padding:12px 28px;border-radius:8px;font-weight:500;font-size:13px;text-decoration:none;text-align:center;">View All Sectors</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<div class="doc-footer">
+  <div>
+    <span>Yantra AI Solutions</span> — Vision AI for Hospitals<br>
+    Confidential Case Study · One Godown Pvt Ltd
+  </div>
+  <div style="text-align:right;">
+    Indicative Data · Benchmark-based<br>
+    <span>IIT/NIT Founded · Prototype Stage</span>
+  </div>
+</div>
+
+</body>
+</html>

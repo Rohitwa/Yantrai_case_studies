@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yantra AI Solutions — Vision AI for Shopping Malls</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d1117;
+    --bg: #f7f6f2;
+    --white: #ffffff;
+    --accent: #1a56db;
+    --accent2: #7c3aed;
+    --accent3: #e3a008;
+    --accent4: #e02424;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --card: #ffffff;
+    --tag-bg: #eef2ff;
+    --tag-fg: #3730a3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Sora', sans-serif; background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.7; }
+
+  .hero { background: var(--ink); color: var(--white); padding: 64px 60px 56px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(124,58,237,0.22) 0%, transparent 70%); pointer-events: none; }
+  .hero-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #a78bfa; margin-bottom: 18px; }
+  .hero h1 { font-size: 42px; font-weight: 800; line-height: 1.15; max-width: 700px; margin-bottom: 20px; }
+  .hero h1 span { color: #a78bfa; }
+  .hero-sub { font-size: 16px; color: #9ca3af; max-width: 600px; font-weight: 300; margin-bottom: 36px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+  .badge { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #e5e7eb; padding: 6px 14px; border-radius: 40px; font-size: 12px; font-weight: 500; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  .section-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .section-title { font-size: 26px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+  .section-desc { color: var(--muted); font-size: 14px; max-width: 620px; margin-bottom: 40px; font-weight: 400; }
+
+  .kpi-strip { background: var(--ink); padding: 0; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .kpi-item { padding: 36px 32px; border-right: 1px solid rgba(255,255,255,0.08); color: var(--white); }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-num { font-size: 44px; font-weight: 800; color: #a78bfa; line-height: 1; margin-bottom: 6px; }
+  .kpi-label { font-size: 13px; color: #9ca3af; font-weight: 400; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .about-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+  .about-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .icon-blue { background: #dbeafe; }
+  .icon-green { background: #d1fae5; }
+  .icon-yellow { background: #fef3c7; }
+  .icon-purple { background: #ede9fe; }
+
+  .usecase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .uc-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px; position: relative; overflow: hidden; transition: box-shadow 0.2s; }
+  .uc-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .uc-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
+  .uc-card.blue::after { background: var(--accent); }
+  .uc-card.purple::after { background: #7c3aed; }
+  .uc-card.yellow::after { background: var(--accent3); }
+  .uc-card.red::after { background: var(--accent4); }
+  .uc-card.teal::after { background: #0891b2; }
+  .uc-card.indigo::after { background: #4f46e5; }
+  .uc-emoji { font-size: 26px; margin-bottom: 12px; }
+  .uc-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .uc-desc { font-size: 12px; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+  .uc-solution { font-size: 11px; font-family: 'IBM Plex Mono', monospace; background: var(--bg); border-radius: 6px; padding: 6px 10px; color: var(--ink); margin-bottom: 14px; }
+  .uc-kpi { font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .kpi-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+  .iaas-wrap { background: #1e293b; border-radius: 16px; padding: 40px; color: var(--white); }
+  .iaas-title-bar { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+  .iaas-title-bar h3 { font-size: 18px; font-weight: 700; color: var(--white); }
+  .iaas-badge { background: rgba(96,165,250,0.15); border: 1px solid rgba(96,165,250,0.3); color: #93c5fd; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 1px; }
+  .iaas-stack { display: flex; flex-direction: column; gap: 4px; }
+  .iaas-row { display: flex; align-items: stretch; gap: 4px; }
+  .iaas-layer-label { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 9px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 2px; text-transform: uppercase; color: #6b7280; padding: 0 10px; display: flex; align-items: center; justify-content: center; min-width: 32px; }
+  .iaas-cells { display: flex; flex: 1; gap: 4px; }
+  .iaas-cell { flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 14px 16px; font-size: 12px; font-weight: 500; color: #e5e7eb; display: flex; flex-direction: column; gap: 4px; }
+  .iaas-cell.highlight { background: rgba(59,130,246,0.2); border-color: rgba(96,165,250,0.35); color: #bfdbfe; }
+  .iaas-cell.green-hl { background: rgba(16,185,129,0.18); border-color: rgba(52,211,153,0.3); color: #a7f3d0; }
+  .iaas-cell.yellow-hl { background: rgba(245,158,11,0.18); border-color: rgba(251,191,36,0.3); color: #fde68a; }
+  .iaas-cell .cell-icon { font-size: 16px; margin-bottom: 2px; }
+  .iaas-cell .cell-label { font-size: 11px; font-weight: 700; }
+  .iaas-cell .cell-sub { font-size: 10px; opacity: 0.7; font-family: 'IBM Plex Mono', monospace; }
+  .iaas-arrow-row { display: flex; justify-content: center; align-items: center; gap: 16px; padding: 4px 0; }
+  .iaas-down-arrow { color: #4b5563; font-size: 20px; flex: 1; text-align: center; }
+
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .benefit-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .benefit-num { font-size: 38px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+  .benefit-label { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .benefit-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .bar-track { margin-top: 14px; background: var(--border); border-radius: 4px; height: 6px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; }
+
+  .urgency-band { background: #fefce8; border: 1.5px solid #fde68a; border-radius: 12px; padding: 28px 32px; display: flex; gap: 20px; align-items: flex-start; }
+  .urgency-icon { font-size: 28px; flex-shrink: 0; }
+  .urgency-body h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .urgency-body p { font-size: 13px; color: #78350f; line-height: 1.6; }
+  .phase-row { display: flex; gap: 12px; margin-top: 18px; }
+  .phase-item { flex: 1; background: var(--white); border: 1px solid #fde68a; border-radius: 8px; padding: 14px; font-size: 12px; }
+  .phase-item strong { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+
+  .doc-footer { background: var(--ink); color: #6b7280; padding: 28px 40px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+  .doc-footer span { font-weight: 600; color: #9ca3af; }
+
+  @media (max-width: 900px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .usecase-grid { grid-template-columns: repeat(2, 1fr); }
+    .benefits-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .hero { padding: 40px 24px; }
+    .hero h1 { font-size: 28px; }
+    .container { padding: 0 20px; }
+    .phase-row { flex-direction: column; }
+  }
+  @media print {
+    body { background: white; }
+    .hero { -webkit-print-color-adjust: exact; }
+    .kpi-strip { -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Vision AI · Shopping Malls · Yantra AI Solutions</p>
+    <h1>Zero Shrinkage. Smarter Floors.<br><span>Mall Intelligence</span> at Every Zone.</h1>
+    <p class="hero-sub">How Yantra AI Solutions converts your existing CCTV into a real-time operations brain — catching theft, optimising queues, and turning footfall into tenant revenue intelligence.</p>
+    <div class="hero-badges">
+      <span class="badge">🛍️ Footfall Analytics</span>
+      <span class="badge">🚨 Anti-Shoplifting AI</span>
+      <span class="badge">⏱️ Queue Intelligence</span>
+      <span class="badge">🚗 Parking ANPR</span>
+      <span class="badge">🔥 Emergency Response</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ KPI STRIP ══════════════════════════════════════════ -->
+<div class="kpi-strip">
+  <div class="kpi-grid">
+    <div class="kpi-item">
+      <div class="kpi-num">~60%</div>
+      <div class="kpi-label">Reduction in retail shrinkage (indicative)</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">~97%</div>
+      <div class="kpi-label">Footfall counting accuracy</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">⚡ Live</div>
+      <div class="kpi-label">Queue alerts to floor managers</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-num">Multi</div>
+      <div class="kpi-label">Multi-Use Cases across one platform</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT YANTRA ═══════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Company Overview</p>
+    <h2 class="section-title">Who is Yantra AI Solutions?</h2>
+    <p class="section-desc">An AI-first team from IIT/NIT backgrounds, building Vision AI products that work at India-scale — rugged, cost-effective, and deployable on your existing camera infrastructure.</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3><span class="icon icon-blue">🎓</span> IIT/NIT Founders</h3>
+        <p style="font-size:13px;color:var(--muted);">Research-grade AI applied to real operations problems. Founders bring deep expertise in computer vision and enterprise deployments.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-green">🏗️</span> Works on Existing Cameras</h3>
+        <p style="font-size:13px;color:var(--muted);">No rip-and-replace. Yantra AI connects to your current CCTV infrastructure and adds intelligence at the edge — minimal disruption.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-yellow">🧩</span> Modular & Expandable</h3>
+        <p style="font-size:13px;color:var(--muted);">Start with one use case — footfall or anti-shoplifting. Add queue intelligence, ANPR, and tenant analytics progressively over time.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="icon icon-purple">📡</span> Intelligence as a Service</h3>
+        <p style="font-size:13px;color:var(--muted);">IaaS model means you get dashboards, alerts, and reports — not just raw video. Actionable intelligence delivered as a managed service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ USE CASES ══════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Platform Capabilities</p>
+    <h2 class="section-title">Multi-Use Cases. One Integrated Platform.</h2>
+    <p class="section-desc">From shoplifting detection to tenant performance analytics — every module runs on the same AI stack, sharing cameras and compute infrastructure across your mall.</p>
+    <div class="usecase-grid">
+
+      <div class="uc-card blue">
+        <div class="uc-emoji">🛍️</div>
+        <div class="uc-title">Shoplifting Detection</div>
+        <div class="uc-desc">Behaviour Analysis AI monitors concealment actions, unusual dwell patterns, and item handling across all zones — flagging incidents before merchandise exits the store.</div>
+        <div class="uc-solution">Behaviour Analysis + Alert Engine</div>
+        <div class="uc-kpi" style="color:#1a56db"><span class="kpi-dot"></span>~60% shrinkage reduction · &lt;30 sec alert</div>
+      </div>
+
+      <div class="uc-card purple">
+        <div class="uc-emoji">📊</div>
+        <div class="uc-title">Footfall & Zone Heatmaps</div>
+        <div class="uc-desc">Real-time people counting and zone analytics across every floor. Understand which areas attract dwell, which drives conversion — and share data with tenants to justify rents.</div>
+        <div class="uc-solution">People Counter + Zone Analytics</div>
+        <div class="uc-kpi" style="color:#7c3aed"><span class="kpi-dot"></span>~97% count accuracy · Dwell time per zone</div>
+      </div>
+
+      <div class="uc-card yellow">
+        <div class="uc-emoji">🚶</div>
+        <div class="uc-title">Queue Length Monitoring</div>
+        <div class="uc-desc">Overhead AI measures queue depth at food courts, checkout counters, and service desks — triggering manager alerts when abandonment risk is high, before shoppers walk away.</div>
+        <div class="uc-solution">Queue Detection + Manager Alerts</div>
+        <div class="uc-kpi" style="color:#e3a008"><span class="kpi-dot"></span>~40% reduction in queue abandonment</div>
+      </div>
+
+      <div class="uc-card red">
+        <div class="uc-emoji">🚗</div>
+        <div class="uc-title">Parking ANPR & Management</div>
+        <div class="uc-desc">Automatic Number Plate Recognition reads Indian plates in all lighting conditions. Automates barrier control, tracks vehicle dwell, and generates complete parking revenue audit trails.</div>
+        <div class="uc-solution">Number Plate Recognition + Access Control</div>
+        <div class="uc-kpi" style="color:#e02424"><span class="kpi-dot"></span>100% vehicle audit trail · Unauth entries flagged</div>
+      </div>
+
+      <div class="uc-card teal">
+        <div class="uc-emoji">🔥</div>
+        <div class="uc-title">Emergency & Crowd Control</div>
+        <div class="uc-desc">Crowd density AI monitors zone occupancy in real time. Detects dangerous crowd buildup during events and provides security teams with live evacuation routing and headcount data.</div>
+        <div class="uc-solution">Crowd Density + Evacuation AI</div>
+        <div class="uc-kpi" style="color:#0891b2"><span class="kpi-dot"></span>Real-time zone occupancy · Evacuation routing</div>
+      </div>
+
+      <div class="uc-card indigo">
+        <div class="uc-emoji">🎯</div>
+        <div class="uc-title">Tenant Performance Analytics</div>
+        <div class="uc-desc">AI attributes footfall to individual stores, tracks conversion rates per tenant, and benchmarks performance vs adjacent zones — giving mall management objective data for rent reviews.</div>
+        <div class="uc-solution">Footfall Attribution + Conversion AI</div>
+        <div class="uc-kpi" style="color:#4f46e5"><span class="kpi-dot"></span>Per-tenant footfall · Peak hour conversion map</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ IAAS STACK ══════════════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">IaaS — Intelligence as a Service</p>
+    <h2 class="section-title">The AI Stack That Powers IaaS</h2>
+    <p class="section-desc">Mall cameras stream to edge AI processors which classify events locally — then a multimodal LLM synthesises everything into operations dashboards, tenant reports, and real-time security alerts.</p>
+
+    <div class="iaas-wrap">
+      <div class="iaas-title-bar">
+        <h3>Intelligence as a Service (IaaS) — AI Stack</h3>
+        <span class="iaas-badge">MULTIMODAL LLM CORE</span>
+      </div>
+      <div class="iaas-stack">
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 1</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell"><span class="cell-icon">📷</span><span class="cell-label">Visual Input</span><span class="cell-sub">Overhead + PTZ CCTV cameras</span></div>
+            <div class="iaas-cell"><span class="cell-icon">🅿️</span><span class="cell-label">ANPR Cameras</span><span class="cell-sub">Parking entry/exit feeds</span></div>
+            <div class="iaas-cell"><span class="cell-icon">📡</span><span class="cell-label">Sensor Data</span><span class="cell-sub">POS + occupancy sensors</span></div>
+            <div class="iaas-cell"><span class="cell-icon">📍</span><span class="cell-label">Zone Maps</span><span class="cell-sub">Floor layouts + zone definitions</span></div>
+          </div>
+        </div>
+
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.3">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+          <div class="iaas-down-arrow">↓</div>
+        </div>
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 2</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell highlight"><span class="cell-icon">⚡</span><span class="cell-label">YOLO Object Detection</span><span class="cell-sub">Person, bag, vehicle classification</span></div>
+            <div class="iaas-cell highlight"><span class="cell-icon">🔁</span><span class="cell-label">ReID Tracking</span><span class="cell-sub">Cross-camera person tracking</span></div>
+            <div class="iaas-cell highlight"><span class="cell-icon">📏</span><span class="cell-label">Queue Estimation Model</span><span class="cell-sub">Overhead queue length counting</span></div>
+            <div class="iaas-cell highlight"><span class="cell-icon">🔡</span><span class="cell-label">ANPR Engine</span><span class="cell-sub">Indian plates, day & night</span></div>
+          </div>
+        </div>
+
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.3">↓</div>
+          <div class="iaas-down-arrow" style="flex:4;text-align:center;font-size:12px;color:#6b7280">↓ Edge events streamed to cloud intelligence layer</div>
+        </div>
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 3</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell green-hl" style="flex:2"><span class="cell-icon">🤖</span><span class="cell-label">Multimodal LLM Core</span><span class="cell-sub">Synthesises footfall, behaviour & zone data into actionable retail intelligence</span></div>
+            <div class="iaas-cell"><span class="cell-icon">🗄️</span><span class="cell-label">Mall Context DB</span><span class="cell-sub">Tenant map, zone thresholds, events</span></div>
+            <div class="iaas-cell"><span class="cell-icon">📐</span><span class="cell-label">Rules Engine</span><span class="cell-sub">Alert triggers, SLA thresholds</span></div>
+          </div>
+        </div>
+
+        <div class="iaas-arrow-row">
+          <div class="iaas-down-arrow" style="flex:0.3">↓</div>
+          <div class="iaas-down-arrow" style="flex:4;text-align:center;font-size:12px;color:#6b7280">↓ Intelligence delivered as outputs</div>
+        </div>
+
+        <div class="iaas-row">
+          <div class="iaas-layer-label">Layer 4</div>
+          <div class="iaas-cells">
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">📊</span><span class="cell-label">Operations Dashboard</span><span class="cell-sub">Management + security teams</span></div>
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">🔔</span><span class="cell-label">Real-time Alerts</span><span class="cell-sub">Shoplifting, queue, crowd density</span></div>
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">📱</span><span class="cell-label">Store Manager App</span><span class="cell-sub">Per-tenant footfall & alerts</span></div>
+            <div class="iaas-cell yellow-hl"><span class="cell-icon">📝</span><span class="cell-label">Tenant Reports</span><span class="cell-sub">Weekly footfall & conversion data</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPECTED BENEFITS ═══════════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Expected Outcomes</p>
+    <h2 class="section-title">What Mall Operators Can Expect</h2>
+    <p class="section-desc">Benchmark-based projections from comparable retail deployments. All data is indicative — actual results vary by site configuration and scale.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#7c3aed">~60%</div>
+        <div class="benefit-label">Shrinkage Reduction</div>
+        <div class="benefit-desc">Behavioural AI catches concealments before exit. Faster intervention means fewer losses per shift across anchor stores.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:60%;background:#7c3aed"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#1a56db">~97%</div>
+        <div class="benefit-label">Footfall Count Accuracy</div>
+        <div class="benefit-desc">Overhead AI people counters with drift correction outperform traditional infrared sensors, especially in crowded entry zones.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:97%;background:#1a56db"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#e3a008">~40%</div>
+        <div class="benefit-label">Reduction in Queue Abandonment</div>
+        <div class="benefit-desc">Proactive manager alerts before queues become visible to shoppers. Reduces walk-away rates during peak lunch and weekend hours.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:40%;background:#e3a008"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#e02424">⚡ Live</div>
+        <div class="benefit-label">Shoplifting Alerts</div>
+        <div class="benefit-desc">Sub-30 second alert from AI detection to security notification — versus hours of post-event CCTV review in traditional operations.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:90%;background:#e02424"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#0891b2">3×</div>
+        <div class="benefit-label">Faster Post-Incident Investigation</div>
+        <div class="benefit-desc">Auto-extracted, timestamped event clips replace hours of manual CCTV scrubbing. Evidence ready in seconds for security teams.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:75%;background:#0891b2"></div></div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-num" style="color:#4f46e5">100%</div>
+        <div class="benefit-label">Parking Audit Trail</div>
+        <div class="benefit-desc">Every vehicle entry and exit logged with timestamp, plate, and duration — enabling dispute resolution and revenue reconciliation.</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%;background:#4f46e5"></div></div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:24px;font-family:'IBM Plex Mono',monospace;">* Indicative outcomes based on benchmark industry data. Actual results vary by site configuration.</p>
+  </div>
+</section>
+
+<!-- ══ URGENCY + ROADMAP + CTA ════════════════════════════ -->
+<section>
+  <div class="container">
+    <p class="section-label">Market Urgency</p>
+    <h2 class="section-title">Why Mall Operators Are Moving Now</h2>
+    <p class="section-desc">India's retail surge in Tier-2 cities is accelerating competition. Shrinkage remains high and CCTV footage is largely unmonitored. Early movers gain a measurable advantage in tenant retention and shopper experience.</p>
+
+    <div class="urgency-band">
+      <div class="urgency-icon">⚡</div>
+      <div class="urgency-body">
+        <h4>750+ Organised Malls. Most Still on Manual CCTV.</h4>
+        <p>India's mall sector is growing but most operations teams lack real-time intelligence. Malls deploying Vision AI first gain measurable tenant retention, insurer preference, and visitor data their competitors cannot match.</p>
+        <div class="phase-row">
+          <div class="phase-item">
+            <strong>Phase 1 — Anchor Zone Pilot</strong>
+            2–3 anchor stores + parking. Core: footfall + ANPR.
+            <span style="color:var(--muted);display:block;margin-top:4px">2–3 months</span>
+          </div>
+          <div class="phase-item">
+            <strong>Phase 2 — Full Floor Coverage</strong>
+            All zones. Add shoplifting detection + queue alerts.
+            <span style="color:var(--muted);display:block;margin-top:4px">3–6 months</span>
+          </div>
+          <div class="phase-item">
+            <strong>Phase 3 — Tenant Intelligence</strong>
+            Chain analytics, tenant dashboards, predictive crowd management.
+            <span style="color:var(--muted);display:block;margin-top:4px">Ongoing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;background:var(--ink);border-radius:16px;padding:40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div>
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#a78bfa;margin-bottom:12px;">GET STARTED</p>
+        <h3 style="font-size:24px;font-weight:800;color:#ffffff;margin-bottom:8px;">Prototype is Free.<br>Book a Demo Now.</h3>
+        <p style="font-size:14px;color:#9ca3af;font-weight:300;">See Yantra AI running live on your mall floor — footfall, queues, and theft detection in real time.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:200px;">
+        <a href="#" style="background:#1a56db;color:#fff;padding:14px 28px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;text-align:center;">Book a Demo →</a>
+        <a href="#" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#e5e7eb;padding:12px 28px;border-radius:8px;font-weight:500;font-size:13px;text-decoration:none;text-align:center;">View All Sectors</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<div class="doc-footer">
+  <div>
+    <span>Yantra AI Solutions</span> — Vision AI for Shopping Malls<br>
+    Confidential Case Study · One Godown Pvt Ltd
+  </div>
+  <div style="text-align:right;">
+    Indicative Data · Benchmark-based<br>
+    <span>IIT/NIT Founded · Prototype Stage</span>
+  </div>
+</div>
+
+</body>
+</html>
